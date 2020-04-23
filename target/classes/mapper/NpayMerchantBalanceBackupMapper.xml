@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayMerchantBalanceBackupMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayMerchantBalanceBackup" >
+    <result column="merchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="merchantName" property="merchantname" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="INTEGER" />
+    <result column="balance_available" property="balanceAvailable" jdbcType="INTEGER" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.NpayMerchantBalanceBackup" >
+    insert into npay_merchant_balance_backup (merchantId, merchantName, status, 
+      balance, balance_available, freeze_balance
+      )
+    values (#{merchantid,jdbcType=VARCHAR}, #{merchantname,jdbcType=CHAR}, #{status,jdbcType=INTEGER}, 
+      #{balance,jdbcType=INTEGER}, #{balanceAvailable,jdbcType=INTEGER}, #{freezeBalance,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayMerchantBalanceBackup" >
+    insert into npay_merchant_balance_backup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        merchantId,
+      </if>
+      <if test="merchantname != null" >
+        merchantName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="balanceAvailable != null" >
+        balance_available,
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantname != null" >
+        #{merchantname,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="balanceAvailable != null" >
+        #{balanceAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="freezeBalance != null" >
+        #{freezeBalance,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

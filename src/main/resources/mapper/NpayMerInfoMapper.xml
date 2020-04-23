@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayMerInfoDao" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayMerInfo" >
+    <id column="mer_id" property="merId" jdbcType="VARCHAR" />
+    <result column="mer_short_name" property="merShortName" jdbcType="VARCHAR" />
+    <result column="mer_name" property="merName" jdbcType="VARCHAR" />
+    <result column="mer_reg_no" property="merRegNo" jdbcType="VARCHAR" />
+    <result column="mer_reg_addr" property="merRegAddr" jdbcType="VARCHAR" />
+    <result column="mer_tax_no" property="merTaxNo" jdbcType="VARCHAR" />
+    <result column="mer_organization_certificate" property="merOrganizationCertificate" jdbcType="VARCHAR" />
+    <result column="mer_reg_capital" property="merRegCapital" jdbcType="VARCHAR" />
+    <result column="mer_kind" property="merKind" jdbcType="VARCHAR" />
+    <result column="mer_risk_level" property="merRiskLevel" jdbcType="INTEGER" />
+    <result column="mer_license_valid_date" property="merLicenseValidDate" jdbcType="VARCHAR" />
+    <result column="mer_business_type" property="merBusinessType" jdbcType="VARCHAR" />
+    <result column="mer_province_id" property="merProvinceId" jdbcType="INTEGER" />
+    <result column="mer_city_id" property="merCityId" jdbcType="INTEGER" />
+    <result column="mer_address" property="merAddress" jdbcType="VARCHAR" />
+    <result column="mer_legal_person" property="merLegalPerson" jdbcType="VARCHAR" />
+    <result column="mer_legal_id_type" property="merLegalIdType" jdbcType="VARCHAR" />
+    <result column="mer_legal_id_number" property="merLegalIdNumber" jdbcType="VARCHAR" />
+    <result column="mer_legal_id_valid_date" property="merLegalIdValidDate" jdbcType="VARCHAR" />
+    <result column="open_date" property="openDate" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="contact_email" property="contactEmail" jdbcType="VARCHAR" />
+    <result column="sett_bank_id" property="settBankId" jdbcType="VARCHAR" />
+    <result column="sett_bank_type" property="settBankType" jdbcType="CHAR" />
+    <result column="sett_bank_account_no" property="settBankAccountNo" jdbcType="VARCHAR" />
+    <result column="sett_account_name" property="settAccountName" jdbcType="VARCHAR" />
+    <result column="sett_certify_id" property="settCertifyId" jdbcType="VARCHAR" />
+    <result column="open_product_ids" property="openProductIds" jdbcType="VARCHAR" />
+    <result column="open_gateways" property="openGateways" jdbcType="VARCHAR" />
+    <result column="mer_info_create_time" property="merInfoCreateTime" jdbcType="INTEGER" />
+    <result column="mer_info_update_time" property="merInfoUpdateTime" jdbcType="INTEGER" />
+    <result column="mer_check_status" property="merCheckStatus" jdbcType="INTEGER" />
+    <result column="mer_info_check_time" property="merInfoCheckTime" jdbcType="INTEGER" />
+    <result column="mer_open_status" property="merOpenStatus" jdbcType="INTEGER" />
+    <result column="mer_secret_key" property="merSecretKey" jdbcType="VARCHAR" />
+    <result column="mer_ip_whitelist" property="merIpWhitelist" jdbcType="VARCHAR" />
+    <result column="mer_need_check_ip_whitelist" property="merNeedCheckIpWhitelist" jdbcType="INTEGER" />
+    <result column="mer_open_time" property="merOpenTime" jdbcType="INTEGER" />
+    <result column="mer_open_mail_sent_time" property="merOpenMailSentTime" jdbcType="INTEGER" />
+    <result column="daifu_channel_id" property="daifuChannelId" jdbcType="VARCHAR" />
+    <result column="daifu_channel_mer_abbr" property="daifuChannelMerAbbr" jdbcType="VARCHAR" />
+    <result column="daifu_channel_mer_id" property="daifuChannelMerId" jdbcType="VARCHAR" />
+    <result column="daifu_channel_channel_id" property="daifuChannelChannelId" jdbcType="VARCHAR" />
+    <result column="daifu_channel_t1" property="daifuChannelT1" jdbcType="INTEGER" />
+    <result column="limit_in_money_daily" property="limitInMoneyDaily" jdbcType="INTEGER" />
+    <result column="limit_in_money_single" property="limitInMoneySingle" jdbcType="INTEGER" />
+    <result column="limit_out_money_single" property="limitOutMoneySingle" jdbcType="INTEGER" />
+    <result column="limit_out_money_card_daily" property="limitOutMoneyCardDaily" jdbcType="INTEGER" />
+    <result column="t1" property="t1" jdbcType="INTEGER" />
+    <result column="kft_mer_id" property="kftMerId" jdbcType="VARCHAR" />
+    <result column="kft_sce_mer_ids" property="kftSceMerIds" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="authkey" property="authkey" jdbcType="VARCHAR" />
+    <result column="is_hide" property="isHide" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <select id="getMerInfoById" resultMap="BaseResultMap">   
+  	select * from npay_mer_info where mer_id=#{id}
+  </select>
+  
+  
+  <select id="selectByPrimary" resultMap="BaseResultMap" parameterType="com.myd.entity.NpayMerInfo">
+  		SELECT 
+	n.mer_id merId,
+	n.mer_short_name merShortName,
+	n.open_product_ids openProductIds,
+	n.mer_info_update_time merInfoUpdateTime,
+	n.mer_risk_level merRiskLevel,
+	n.mer_info_check_time merInfoCheckTime,
+	n.mer_open_time merOpenTime,
+	n.mer_check_status merCheckStatus,
+	n.mer_open_status merOpenStatus
+	from npay_mer_info n 
+  </select>
+  
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from npay_mer_info
+    where mer_id = #{merId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByExampleMer" parameterType="map" resultType="map">
+	SELECT *,
+	FROM_UNIXTIME(n.mer_info_update_time,'%Y-%m-%d %H:%i:%s') as update_time,
+	FROM_UNIXTIME(n.mer_info_check_time,'%Y-%m-%d %H:%i:%s') as check_time,
+	FROM_UNIXTIME(n.mer_open_time,'%Y-%m-%d %H:%i:%s') as open_time 
+	from npay_mer_info n
+  	<where>
+  		    n.is_hide = '0'
+  		<if test="merId != null and merId !=''">
+  			and n.mer_id = '${merId}'
+  		</if>
+  		<if test="merShortName != null and merShortName !=''">
+  			and n.mer_short_name like '%${merShortName}%'
+  		</if>
+  	</where>
+  	    ORDER BY n.mer_info_create_time DESC
+  </select>
+  
+  <select id="selectByExampleUser" parameterType="map" resultType="map">
+  	SELECT * from npay_mer_info n
+  	<where>
+  			n.is_hide = '0'
+  		<if test="parameter != null and parameter !=''">
+  			and n.mer_id = '${parameter}' or n.contact = '${parameter}' or n.contact_email = '${parameter}'
+  		</if>
+  	</where>
+  </select>
+ 
+  <update id="updateByExampleSelective" parameterType="com.myd.entity.NpayMerInfo">
+    update npay_mer_info
+    <set>
+      <if test="merId != null">
+        mer_id = #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="merShortName != null">
+        mer_short_name = #{merShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null">
+        mer_name = #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegNo != null">
+        mer_reg_no = #{merRegNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegAddr != null">
+        mer_reg_addr = #{merRegAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="merTaxNo != null">
+        mer_tax_no = #{merTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrganizationCertificate != null">
+        mer_organization_certificate = #{merOrganizationCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegCapital != null">
+        mer_reg_capital = #{merRegCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="merKind != null">
+        mer_kind = #{merKind,jdbcType=VARCHAR},
+      </if>
+      <if test="merRiskLevel != null">
+        mer_risk_level = #{merRiskLevel,jdbcType=INTEGER},
+      </if>
+      <if test="merLicenseValidDate != null">
+        mer_license_valid_date = #{merLicenseValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="merBusinessType != null">
+        mer_business_type = #{merBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="merProvinceId != null">
+        mer_province_id = #{merProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="merCityId != null">
+        mer_city_id = #{merCityId,jdbcType=INTEGER},
+      </if>
+      <if test="merAddress != null">
+        mer_address = #{merAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalPerson != null">
+        mer_legal_person = #{merLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdType != null">
+        mer_legal_id_type = #{merLegalIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdNumber != null">
+        mer_legal_id_number = #{merLegalIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdValidDate != null">
+        mer_legal_id_valid_date = #{merLegalIdValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="openDate != null">
+        open_date = #{openDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null">
+        contact_email = #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="settBankId != null">
+        sett_bank_id = #{settBankId,jdbcType=VARCHAR},
+      </if>
+      <if test="settBankType != null">
+        sett_bank_type = #{settBankType,jdbcType=CHAR},
+      </if>
+      <if test="settBankAccountNo != null">
+        sett_bank_account_no = #{settBankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settAccountName != null">
+        sett_account_name = #{settAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="settCertifyId != null">
+        sett_certify_id = #{settCertifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="openProductIds != null">
+        open_product_ids = #{openProductIds,jdbcType=VARCHAR},
+      </if>
+      <if test="openGateways != null">
+        open_gateways = #{openGateways,jdbcType=VARCHAR},
+      </if>
+      <if test="merInfoCreateTime != null">
+        mer_info_create_time = #{merInfoCreateTime,jdbcType=INTEGER},
+      </if>
+      <if test="merInfoUpdateTime != null">
+        mer_info_update_time = #{merInfoUpdateTime,jdbcType=INTEGER},
+      </if>
+      <if test="merCheckStatus != null">
+        mer_check_status = #{merCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merInfoCheckTime != null">
+        mer_info_check_time = #{merInfoCheckTime,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenStatus != null">
+        mer_open_status = #{merOpenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merSecretKey != null">
+        mer_secret_key = #{merSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merIpWhitelist != null">
+        mer_ip_whitelist = #{merIpWhitelist,jdbcType=VARCHAR},
+      </if>
+      <if test="merNeedCheckIpWhitelist != null">
+        mer_need_check_ip_whitelist = #{merNeedCheckIpWhitelist,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenTime != null">
+        mer_open_time = #{merOpenTime,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenMailSentTime != null">
+        mer_open_mail_sent_time = #{merOpenMailSentTime,jdbcType=INTEGER},
+      </if>
+      <if test="daifuChannelId != null">
+        daifu_channel_id = #{daifuChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelMerAbbr != null">
+        daifu_channel_mer_abbr = #{daifuChannelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelMerId != null">
+        daifu_channel_mer_id = #{daifuChannelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelChannelId != null">
+        daifu_channel_channel_id = #{daifuChannelChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelT1 != null">
+        daifu_channel_t1 = #{daifuChannelT1,jdbcType=INTEGER},
+      </if>
+      <if test="limitInMoneyDaily != null">
+        limit_in_money_daily = #{limitInMoneyDaily,jdbcType=INTEGER},
+      </if>
+      <if test="limitInMoneySingle != null">
+        limit_in_money_single = #{limitInMoneySingle,jdbcType=INTEGER},
+      </if>
+      <if test="limitOutMoneySingle != null">
+        limit_out_money_single = #{limitOutMoneySingle,jdbcType=INTEGER},
+      </if>
+      <if test="limitOutMoneyCardDaily != null">
+        limit_out_money_card_daily = #{limitOutMoneyCardDaily,jdbcType=INTEGER},
+      </if>
+      <if test="t1 != null">
+        t1 = #{t1,jdbcType=INTEGER},
+      </if>
+      <if test="kftMerId != null">
+        kft_mer_id = #{kftMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="kftSceMerIds != null">
+        kft_sce_mer_ids = #{kftSceMerIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="authkey != null">
+        authkey = #{authkey,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null">
+        is_hide = #{isHide,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mer_id = #{merId,jdbcType=VARCHAR}
+  </update>
+ 
+ 
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayMerInfo" >
+    insert into npay_mer_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merId != null" >
+        mer_id,
+      </if>
+      <if test="merShortName != null" >
+        mer_short_name,
+      </if>
+      <if test="merName != null" >
+        mer_name,
+      </if>
+      <if test="merRegNo != null" >
+        mer_reg_no,
+      </if>
+      <if test="merRegAddr != null" >
+        mer_reg_addr,
+      </if>
+      <if test="merTaxNo != null" >
+        mer_tax_no,
+      </if>
+      <if test="merOrganizationCertificate != null" >
+        mer_organization_certificate,
+      </if>
+      <if test="merRegCapital != null" >
+        mer_reg_capital,
+      </if>
+      <if test="merKind != null" >
+        mer_kind,
+      </if>
+      <if test="merRiskLevel != null" >
+        mer_risk_level,
+      </if>
+      <if test="merLicenseValidDate != null" >
+        mer_license_valid_date,
+      </if>
+      <if test="merBusinessType != null" >
+        mer_business_type,
+      </if>
+      <if test="merProvinceId != null" >
+        mer_province_id,
+      </if>
+      <if test="merCityId != null" >
+        mer_city_id,
+      </if>
+      <if test="merAddress != null" >
+        mer_address,
+      </if>
+      <if test="merLegalPerson != null" >
+        mer_legal_person,
+      </if>
+      <if test="merLegalIdType != null" >
+        mer_legal_id_type,
+      </if>
+      <if test="merLegalIdNumber != null" >
+        mer_legal_id_number,
+      </if>
+      <if test="merLegalIdValidDate != null" >
+        mer_legal_id_valid_date,
+      </if>
+      <if test="openDate != null" >
+        open_date,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="contactEmail != null" >
+        contact_email,
+      </if>
+      <if test="settBankId != null" >
+        sett_bank_id,
+      </if>
+      <if test="settBankType != null" >
+        sett_bank_type,
+      </if>
+      <if test="settBankAccountNo != null" >
+        sett_bank_account_no,
+      </if>
+      <if test="settAccountName != null" >
+        sett_account_name,
+      </if>
+      <if test="settCertifyId != null" >
+        sett_certify_id,
+      </if>
+      <if test="openProductIds != null" >
+        open_product_ids,
+      </if>
+      <if test="openGateways != null" >
+        open_gateways,
+      </if>
+      <if test="merInfoCreateTime != null" >
+        mer_info_create_time,
+      </if>
+      <if test="merInfoUpdateTime != null" >
+        mer_info_update_time,
+      </if>
+      <if test="merCheckStatus != null" >
+        mer_check_status,
+      </if>
+      <if test="merInfoCheckTime != null" >
+        mer_info_check_time,
+      </if>
+      <if test="merOpenStatus != null" >
+        mer_open_status,
+      </if>
+      <if test="merSecretKey != null" >
+        mer_secret_key,
+      </if>
+      <if test="merIpWhitelist != null" >
+        mer_ip_whitelist,
+      </if>
+      <if test="merNeedCheckIpWhitelist != null" >
+        mer_need_check_ip_whitelist,
+      </if>
+      <if test="merOpenTime != null" >
+        mer_open_time,
+      </if>
+      <if test="merOpenMailSentTime != null" >
+        mer_open_mail_sent_time,
+      </if>
+      <if test="daifuChannelId != null" >
+        daifu_channel_id,
+      </if>
+      <if test="daifuChannelMerAbbr != null" >
+        daifu_channel_mer_abbr,
+      </if>
+      <if test="daifuChannelMerId != null" >
+        daifu_channel_mer_id,
+      </if>
+      <if test="daifuChannelChannelId != null" >
+        daifu_channel_channel_id,
+      </if>
+      <if test="daifuChannelT1 != null" >
+        daifu_channel_t1,
+      </if>
+      <if test="limitInMoneyDaily != null" >
+        limit_in_money_daily,
+      </if>
+      <if test="limitInMoneySingle != null" >
+        limit_in_money_single,
+      </if>
+      <if test="limitOutMoneySingle != null" >
+        limit_out_money_single,
+      </if>
+      <if test="limitOutMoneyCardDaily != null" >
+        limit_out_money_card_daily,
+      </if>
+      <if test="t1 != null" >
+        t1,
+      </if>
+      <if test="kftMerId != null" >
+        kft_mer_id,
+      </if>
+      <if test="kftSceMerIds != null" >
+        kft_sce_mer_ids,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="authkey != null" >
+        authkey,
+      </if>
+      <if test="isHide != null" >
+        is_hide,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merId != null" >
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="merShortName != null" >
+        #{merShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null" >
+        #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegNo != null" >
+        #{merRegNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegAddr != null" >
+        #{merRegAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="merTaxNo != null" >
+        #{merTaxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrganizationCertificate != null" >
+        #{merOrganizationCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="merRegCapital != null" >
+        #{merRegCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="merKind != null" >
+        #{merKind,jdbcType=VARCHAR},
+      </if>
+      <if test="merRiskLevel != null" >
+        #{merRiskLevel,jdbcType=INTEGER},
+      </if>
+      <if test="merLicenseValidDate != null" >
+        #{merLicenseValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="merBusinessType != null" >
+        #{merBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="merProvinceId != null" >
+        #{merProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="merCityId != null" >
+        #{merCityId,jdbcType=INTEGER},
+      </if>
+      <if test="merAddress != null" >
+        #{merAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalPerson != null" >
+        #{merLegalPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdType != null" >
+        #{merLegalIdType,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdNumber != null" >
+        #{merLegalIdNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="merLegalIdValidDate != null" >
+        #{merLegalIdValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="openDate != null" >
+        #{openDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="contactEmail != null" >
+        #{contactEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="settBankId != null" >
+        #{settBankId,jdbcType=VARCHAR},
+      </if>
+      <if test="settBankType != null" >
+        #{settBankType,jdbcType=CHAR},
+      </if>
+      <if test="settBankAccountNo != null" >
+        #{settBankAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="settAccountName != null" >
+        #{settAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="settCertifyId != null" >
+        #{settCertifyId,jdbcType=VARCHAR},
+      </if>
+      <if test="openProductIds != null" >
+        #{openProductIds,jdbcType=VARCHAR},
+      </if>
+      <if test="openGateways != null" >
+        #{openGateways,jdbcType=VARCHAR},
+      </if>
+      <if test="merInfoCreateTime != null" >
+        #{merInfoCreateTime,jdbcType=INTEGER},
+      </if>
+      <if test="merInfoUpdateTime != null" >
+        #{merInfoUpdateTime,jdbcType=INTEGER},
+      </if>
+      <if test="merCheckStatus != null" >
+        #{merCheckStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merInfoCheckTime != null" >
+        #{merInfoCheckTime,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenStatus != null" >
+        #{merOpenStatus,jdbcType=INTEGER},
+      </if>
+      <if test="merSecretKey != null" >
+        #{merSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merIpWhitelist != null" >
+        #{merIpWhitelist,jdbcType=VARCHAR},
+      </if>
+      <if test="merNeedCheckIpWhitelist != null" >
+        #{merNeedCheckIpWhitelist,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenTime != null" >
+        #{merOpenTime,jdbcType=INTEGER},
+      </if>
+      <if test="merOpenMailSentTime != null" >
+        #{merOpenMailSentTime,jdbcType=INTEGER},
+      </if>
+      <if test="daifuChannelId != null" >
+        #{daifuChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelMerAbbr != null" >
+        #{daifuChannelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelMerId != null" >
+        #{daifuChannelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelChannelId != null" >
+        #{daifuChannelChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="daifuChannelT1 != null" >
+        #{daifuChannelT1,jdbcType=INTEGER},
+      </if>
+      <if test="limitInMoneyDaily != null" >
+        #{limitInMoneyDaily,jdbcType=INTEGER},
+      </if>
+      <if test="limitInMoneySingle != null" >
+        #{limitInMoneySingle,jdbcType=INTEGER},
+      </if>
+      <if test="limitOutMoneySingle != null" >
+        #{limitOutMoneySingle,jdbcType=INTEGER},
+      </if>
+      <if test="limitOutMoneyCardDaily != null" >
+        #{limitOutMoneyCardDaily,jdbcType=INTEGER},
+      </if>
+      <if test="t1 != null" >
+        #{t1,jdbcType=INTEGER},
+      </if>
+      <if test="kftMerId != null" >
+        #{kftMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="kftSceMerIds != null" >
+        #{kftSceMerIds,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="authkey != null" >
+        #{authkey,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null" >
+        #{isHide,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+ 
+ 
+  <update id="updateByIsHide" parameterType="com.myd.entity.NpayMerInfo">
+  		UPDATE npay_mer_info n SET
+		n.is_hide = #{isHide}
+		WHERE n.mer_id = #{merId}
+  		
+  </update>
+ 
+ 
+ <select id="selectBy" parameterType="map" resultType="map">
+ 			SELECT
+				o.merchantId,
+				cast(
+					SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)
+				) txnAmt
+			FROM
+				npay_order o
+			WHERE
+				o.gateway NOT IN ('daifu')
+			AND o.`status` = '1001'
+			AND DATE_FORMAT(create_at, '%Y-%m-%d') = CURRENT_DATE
+			GROUP BY
+				o.merchantId  
+ </select>
+ 
+ 
+ <select id="selectBydaifu" parameterType="map" resultType="map">
+ 		SELECT
+			o.merchantId,
+			cast(SUM(o.txnAmt)/100 as decimal(18,2)) a
+		FROM
+			npay_order o
+		WHERE
+			o.gateway NOT IN ('daifu')
+		AND o.`status` = '1002'
+		AND DATE_FORMAT(create_at, '%Y-%m-%d') = CURRENT_DATE
+		GROUP BY
+			o.merchantId
+ </select>
+ 
+ 
+ 
+ <select id="selectBydaizhifu" parameterType="map" resultType="map">
+ 			SELECT
+				o.merchantId,
+				cast(
+					SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)
+				) daizhifu
+			FROM
+				npay_order o
+			WHERE
+				o.gateway NOT IN ('daifu')
+			AND o.`status` = '1000'
+			AND date_format(create_at, '%Y-%m-%d') = CURRENT_DATE
+			GROUP BY
+				o.merchantId
+ </select>
+ 
+  <select id="selectBychujin" parameterType="map" resultType="map">
+  			SELECT
+				o.merchantId,
+				cast(
+					SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)
+				) chujin
+			
+			FROM
+				npay_order o
+			WHERE
+				o.gateway = 'daifu'
+			AND o.`status` = '1001'
+			AND date_format(create_at, '%Y-%m-%d') = CURRENT_DATE
+			GROUP BY
+				o.merchantId
+ </select>
+ 
+ 
+ 
+ <select id="selectByshijije" parameterType="map" resultType="map">
+ 			<!-- SELECT
+				o.merchantId,
+			cast((SUM(o.txnAmt) - SUM(out_fee))/100 as decimal(18,2)) shijije
+			FROM
+				npay_order o
+			WHERE
+				o.gateway NOT IN ('daifu')
+			AND o.`status` = '1001'
+			GROUP BY
+				o.merchantId -->
+				
+				SELECT
+				o.merchantId,
+			cast(SUM(o.in_fee) /100 as decimal(18,2)) infee,
+			cast(SUM(o.out_fee) /100 as decimal(18,2)) outfee
+			FROM
+				npay_order o
+			WHERE
+			 o.`status` = '1001'
+			GROUP BY
+				o.merchantId
+				
+				
+ </select>
+ 
+ 
+ 
+ <select id="selectByrujinsum" parameterType="map" resultType="map">
+ 		SELECT
+				o.merchantId,
+				cast(
+					SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)
+				) txnAmt
+			FROM
+				npay_order o
+			WHERE
+				o.gateway NOT IN ('daifu')
+			AND o.`status` = '1001'
+			GROUP BY
+				o.merchantId 
+ 		
+ </select>
+ 
+ 
+ <select id="selectBychujinsum" parameterType="map" resultType="map">
+ 			SELECT
+				o.merchantId,
+				cast(
+					(SUM(o.txnAmt) ) / 100 AS DECIMAL (18, 2)
+				) txnAmt
+			FROM 
+				npay_order o
+			WHERE
+				o.gateway = 'daifu'
+			AND o.`status` = '1001'
+			GROUP BY
+				o.merchantId 
+ 		
+ </select>
+ 
+ 
+ 
+   <select id="selectBychujinze" parameterType="map" resultType="map">
+		SELECT
+			o.merchantId,
+			cast(
+				SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)
+			) chujinze,
+			cast(
+					SUM(o.in_fee) / 100 AS DECIMAL (18, 2)
+				) infee,
+			cast(
+				SUM(out_fee) / 100 AS DECIMAL (18, 2)
+			) outFee
+		FROM
+			npay_order o
+		WHERE
+			o.gateway = 'daifu'
+		AND o.`status` = '1001'
+		GROUP BY
+			o.merchantId
+ </select>
+ 
+ 
+  <select id="selectByExampleAccount" parameterType="map" resultType="map">
+		 SELECT 
+		  m.merchantId,
+		  m.merchantName,
+		  n.open_product_ids,
+		  cast(m.balance/100 as decimal(18,2)) balance,
+		  cast(m.balance_available/100 as decimal(18,2)) balance_available,
+		  cast(m.block_balance/100 as decimal(18,2)) block_balance,
+		  cast(m.freeze_balance/100 as decimal(18,2)) freeze_balance
+		from  npay_mer_info n 
+		LEFT JOIN npay_merchant_balance_2018 m 
+		ON n.mer_id = m.merchantId
+		<where>
+	  		<if test="merId != null and merId !=''">
+	  			and n.mer_id = '${merId}'
+	  		</if>
+	  		<if test="merShortName != null and merShortName !=''">
+	  			and n.mer_short_name like '%${merShortName}%'
+	  		</if>
+	  	</where>
+  </select>
+ 
+  <select id="selectByService" resultMap="BaseResultMap" parameterType="com.myd.entity.NpayMerInfo">
+  		select * from npay_mer_info
+  </select>
+ 
+ 
+  <select id="selectByEntity" parameterType="com.myd.entity.NpayMerInfo" resultMap="BaseResultMap">
+<!--   		SELECT * FROM npay_mer_info n ORDER BY n.mer_info_create_time DESC limit 1 -->
+			SELECT * FROM npay_mer_info n ORDER BY mer_id DESC LIMIT 1
+  </select>
+ 
+ 
+ 
+ 
+ <select id="selectByExampleAccount1" parameterType="map" resultType="map">
+ 	SELECT 
+		o.`status`,
+		n.mer_id,
+		n.mer_short_name,
+		n.open_product_ids,
+		cast(m.balance/100 as decimal(18,2)) balance,
+		cast(m.balance_available/100 as decimal(18,2)) balance_available,
+		cast(m.block_balance/100 as decimal(18,2)) block_balance,
+		cast(m.freeze_balance/100 as decimal(18,2)) freeze_balance,
+		(CASE WHEN o.status = '1000' THEN SUM(o.txnAmt) END ) sm,
+		(CASE WHEN o.status = '1001' THEN SUM(o.txnAmt) END ) sm1,
+		(CASE WHEN o.status = '1002' THEN SUM(o.txnAmt) END ) sm2
+		FROM npay_mer_info n
+		LEFT JOIN npay_merchant_balance_2018 m
+		ON n.mer_id = m.merchantId
+    LEFT JOIN npay_order o
+    ON  n.mer_id = o.merchantId
+		WHERE o.`status` IN('1001')
+       AND date_format(create_at, '%Y-%m-%d') = '2019-03-07'
+			 AND o.gateway = 'bank'
+    GROUP BY n.mer_id , o.`status`
+ </select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+</mapper>

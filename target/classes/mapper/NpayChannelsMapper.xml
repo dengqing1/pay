@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayChannelsMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayChannels" >
+    <id column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="gateway" property="gateway" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="channel_mer_abbr" property="channelMerAbbr" jdbcType="VARCHAR" />
+    <result column="channel_mer_id" property="channelMerId" jdbcType="VARCHAR" />
+    <result column="channel_secret_key" property="channelSecretKey" jdbcType="VARCHAR" />
+    <result column="fee_type" property="feeType" jdbcType="VARCHAR" />
+    <result column="fee_amount" property="feeAmount" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="channel_channel_id" property="channelChannelId" jdbcType="VARCHAR" />
+    <result column="proxyurl" property="proxyurl" jdbcType="VARCHAR" />
+    <result column="clear_cycle" property="clearCycle" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="max_amount" property="maxAmount" jdbcType="INTEGER" />
+    <result column="extra" property="extra" jdbcType="LONGVARCHAR" />
+    <result column="fee_range" property="feeRange" jdbcType="LONGVARCHAR" />
+    <result column="notifyurl" property="notifyurl" jdbcType="VARCHAR" />
+    <result column="min_amount" property="minAmount" jdbcType="INTEGER" />
+    <result column="accumulative" property="accumulative" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    channel_id, gateway, name, channel_mer_abbr, channel_mer_id, channel_secret_key, 
+    fee_type, fee_amount, status, create_time, update_time, channel_channel_id, proxyurl, 
+    clear_cycle, is_delete, max_amount, notifyurl,min_amount,accumulative
+  </sql>
+  <sql id="Blob_Column_List" >
+    extra, fee_range
+  </sql>
+  
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayChannels" >
+    update npay_channels
+    set gateway = #{gateway,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      channel_mer_abbr = #{channelMerAbbr,jdbcType=VARCHAR},
+      channel_mer_id = #{channelMerId,jdbcType=VARCHAR},
+      channel_secret_key = #{channelSecretKey,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      fee_amount = #{feeAmount,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      channel_channel_id = #{channelChannelId,jdbcType=VARCHAR},
+      proxyurl = #{proxyurl,jdbcType=VARCHAR},
+      clear_cycle = #{clearCycle,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER},
+      max_amount = #{maxAmount,jdbcType=INTEGER}
+    where channel_id = #{channelId,jdbcType=VARCHAR}
+  </update>
+  
+   <insert id="insert" parameterType="com.myd.entity.NpayChannels">
+    insert into npay_channels (
+      channel_id, gateway, name, 
+      channel_mer_abbr, channel_mer_id, channel_secret_key, 
+      fee_type, fee_amount, status, 
+      create_time, update_time, channel_channel_id, 
+      proxyurl, clear_cycle, is_delete, 
+      max_amount, extra, fee_range,
+      notifyurl,min_amount,accumulative
+      )
+    values (#{channelId,jdbcType=VARCHAR}, #{gateway,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{channelMerAbbr,jdbcType=VARCHAR}, #{channelMerId,jdbcType=VARCHAR}, #{channelSecretKey,jdbcType=VARCHAR}, 
+      #{feeType,jdbcType=VARCHAR}, #{feeAmount,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, #{channelChannelId,jdbcType=VARCHAR}, 
+      #{proxyurl,jdbcType=VARCHAR}, #{clearCycle,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
+      #{maxAmount,jdbcType=INTEGER}, #{extra,jdbcType=LONGVARCHAR}, #{feeRange,jdbcType=LONGVARCHAR},
+      #{notifyurl,jdbcType=VARCHAR}, #{minAmount,jdbcType=INTEGER}, #{accumulative,jdbcType=INTEGER}
+      )
+  </insert>
+  
+  
+  <select id="selectByPrimary" resultMap="BaseResultMap" parameterType="com.myd.entity.NpayChannels">
+  		SELECT * from npay_channels GROUP BY channel_mer_abbr
+  </select>
+  
+  
+  <select id="selectByGateway" resultMap="BaseResultMap" parameterType="com.myd.entity.NpayChannels">
+  		SELECT
+			c.gateway
+		FROM
+			npay_channels c
+		GROUP BY c.gateway
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_channels
+    where channel_id = #{channelId,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateByIsDelete" parameterType="com.myd.entity.NpayChannels">
+  		UPDATE npay_channels n SET
+		n.is_delete = #{isDelete}
+		WHERE n.channel_id = #{channelId}
+  </update>
+  
+  <select id="selectByExamplechannel" parameterType="map" resultType="map">
+  	SELECT * from npay_channels n
+  	<where>
+  			n.is_delete = '0' 
+  		<if test="gateway != null and gateway !=''">
+  			and n.gateway = '${gateway}'
+  		</if>
+  		<if test="channelMerAbbr != null and channelMerAbbr !=''">
+  			and n.channel_mer_abbr = '${channelMerAbbr}'
+  		</if>
+  		
+  	</where>
+  </select>
+  <select id="getChannelsBygetwayandmerabbr" resultMap="BaseResultMap">
+  	select * from npay_channels where gateway=#{getway} and channel_mer_abbr=#{merabbr} and channel_mer_id=#{channelId}
+  </select>
+  
+  
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayChannels">
+    insert into npay_channels
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="channelId != null">
+        channel_id,
+      </if>
+      <if test="gateway != null">
+        gateway,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="channelMerAbbr != null">
+        channel_mer_abbr,
+      </if>
+      <if test="channelMerId != null">
+        channel_mer_id,
+      </if>
+      <if test="channelSecretKey != null">
+        channel_secret_key,
+      </if>
+      <if test="feeType != null">
+        fee_type,
+      </if>
+      <if test="feeAmount != null">
+        fee_amount,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="channelChannelId != null">
+        channel_channel_id,
+      </if>
+      <if test="proxyurl != null">
+        proxyurl,
+      </if>
+      <if test="clearCycle != null">
+        clear_cycle,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="maxAmount != null">
+        max_amount,
+      </if>
+      <if test="extra != null">
+        extra,
+      </if>
+      <if test="feeRange != null">
+        fee_range,
+      </if>
+      <if test="notifyurl != null">
+        notifyurl,
+      </if>
+      <if test="minAmount != null">
+        min_amount,
+      </if>
+      <if test="accumulative != null">
+        accumulative,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="channelId != null">
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="gateway != null">
+        #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerAbbr != null">
+        #{channelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerId != null">
+        #{channelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSecretKey != null">
+        #{channelSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null">
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="feeAmount != null">
+        #{feeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="channelChannelId != null">
+        #{channelChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="proxyurl != null">
+        #{proxyurl,jdbcType=VARCHAR},
+      </if>
+      <if test="clearCycle != null">
+        #{clearCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="maxAmount != null">
+        #{maxAmount,jdbcType=INTEGER},
+      </if>
+      <if test="extra != null">
+        #{extra,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="feeRange != null">
+        #{feeRange,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="notifyurl != null">
+        #{notifyurl},
+      </if>
+      <if test="minAmount != null">
+        #{minAmount,jdbcType=INTEGER},
+      </if>
+      <if test="feeRange != null">
+        #{accumulative},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayChannels">
+    update npay_channels
+    <set>
+      <if test="gateway != null">
+        gateway = #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerAbbr != null">
+        channel_mer_abbr = #{channelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerId != null">
+        channel_mer_id = #{channelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelSecretKey != null">
+        channel_secret_key = #{channelSecretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null">
+        fee_type = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="feeAmount != null">
+        fee_amount = #{feeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="channelChannelId != null">
+        channel_channel_id = #{channelChannelId,jdbcType=VARCHAR},
+      </if>
+      <if test="proxyurl != null">
+        proxyurl = #{proxyurl,jdbcType=VARCHAR},
+      </if>
+      <if test="clearCycle != null">
+        clear_cycle = #{clearCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="maxAmount != null">
+        max_amount = #{maxAmount,jdbcType=INTEGER},
+      </if>
+      <if test="extra != null">
+        extra = #{extra,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="feeRange != null">
+        fee_range = #{feeRange,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyurl != null">
+        notifyurl = #{notifyurl,jdbcType=INTEGER},
+      </if>
+      <if test="minAmount != null">
+        min_amount = #{minAmount,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="accumulative != null">
+        accumulative = #{accumulative,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where channel_id = #{channelId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <select id="selectByExampleReconciliation" parameterType="map" resultType="map">
+  
+  
+  
+  			SELECT distinct
+				c.channel_mer_id,
+				c.name,
+				(select cast(		SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)	) 	FROM 			npay_order o		
+				WHERE			o.gateway NOT IN ('daifu')		AND o.`status` = '1001'
+				AND c.channel_mer_id = o.channel_mer_id
+				AND	DATE_FORMAT(create_at, '%Y-%m-%d') = CURRENT_DATE
+				) rujin,
+
+				(select cast(		SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)	)	FROM 			npay_order o		
+				WHERE			o.gateway = 'daifu'	AND o.`status` = '1001'
+				AND c.channel_mer_id = o.channel_mer_id	
+				AND	DATE_FORMAT(create_at, '%Y-%m-%d') = CURRENT_DATE
+				) chujin,
+				(select cast(		SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)	) 	FROM 			npay_order o		
+				WHERE			o.gateway NOT IN ('daifu')		AND o.`status` = '1001'
+				AND c.channel_mer_id = o.channel_mer_id
+				) rujinsum,
+
+				(select cast(		SUM(o.txnAmt) / 100 AS DECIMAL (18, 2)	) FROM 			npay_order o		
+				WHERE			o.gateway = 'daifu'	AND o.`status` = '1001'
+				AND c.channel_mer_id = o.channel_mer_id	
+				) chujinsum
+			
+			FROM			npay_channels c	
+			<where>
+		  		<if test="merId != null and merId !=''">
+		  			and c.channel_mer_id = '${merId}'
+		  		</if>
+		  		<if test="merShortName != null and merShortName !=''">
+		  			and c.name like '%${merShortName}%'
+		  		</if>
+		  	</where>
+			GROUP BY	c.channel_mer_id
+	
+	
+  
+  
+
+				
+  </select>
+  
+  
+</mapper>

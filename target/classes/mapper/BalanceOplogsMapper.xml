@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.BalanceOplogsMapper" >
+ 
+  
+    
+  <select id="list" parameterType="map" resultType="com.myd.entity.NpayBalanceOplogs">
+  		SELECT  id ,
+		  		op_type opType , 
+		  		CAST(CAST(txnAmt AS DECIMAL(18,2))/100 AS DECIMAL(18,2)) txnAmts,  
+		  		create_at createAt
+		FROM 
+			npay_balance_oplogs 
+  		<where>
+  			<if test="createAtTimeBegin != null and createAtTimeBegin !=''">
+	  		    and create_at between "${createAtTimeBegin}" and "${createAtTimeEnd}"
+	  		</if>
+  			<if test="merchantId != null and merchantId !=''">
+	  		    and mer_id = '${merchantId}'
+	  		</if>
+  		</where>
+  		ORDER BY create_at DESC
+  		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+  </select>
+  
+  
+  
+  <select id="count" parameterType="map" resultType="int">
+  		SELECT count(1) FROM npay_balance_oplogs 
+  		<where>
+  			<if test="createAtTimeBegin != null and createAtTimeBegin !=''">
+	  		    and create_at between "${createAtTimeBegin}" and "${createAtTimeEnd}"
+	  		</if>
+  				<if test="merchantId != null and merchantId !=''">
+	  		    and mer_id = '${merchantId}'
+	  		</if>
+  		</where>
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.MerchantMapper">
+
+    <select id="getMerchantInformationData" resultType="com.myd.entity.MerchantInformation"
+            parameterType="com.myd.entity.MerchantInformation">
+
+        select fmi.merchant_id,fmi.merchant_name,fmi.product,fmi.information_update_time,fmi.risk_level,fmi.information_audit_status,fmi.audit_time,fmi.opening_status,fmi.opening_time  from fengmai_merchant_information fmi where fmi.del_status=1
+
+    </select>
+
+    <update id="deleteMerchant" parameterType="String">
+
+      update fengmai_merchant_information fmi set fmi.del_status=0 where fmi.merchant_id=#{merchantIds};
+
+    </update>
+
+    <select id="getUpdateMerchantEcho" parameterType="String" resultType="com.myd.entity.MerchantInformation">
+
+     select fmi.merchant_id,fmi.merchant_name,fmi.product,fmi.information_update_time,fmi.risk_level,fmi.information_audit_status,fmi.audit_time,fmi.opening_status,fmi.opening_time  from fengmai_merchant_information fmi where fmi.del_status=1 and fmi.merchant_id=#{merchantId};
+
+    </select>
+
+    <update id="updateMerchantInformation" parameterType="com.myd.entity.MerchantInformation">
+
+    update fengmai_merchant_information fmi set fmi.merchant_name=#{merchant_name},fmi.product=#{product},fmi.information_update_time=#{information_update_time},fmi.risk_level=#{risk_level},fmi.information_audit_status=#{information_audit_status},fmi.audit_time=#{audit_time},fmi.opening_time=#{opening_time},fmi.opening_status=#{opening_status} where fmi.merchant_id=#{merchant_id}
+
+    </update>
+
+    <select id="getMerchantAccountData" resultType="com.myd.entity.MerchantInformation">
+
+    select fmi.merchant_id,fmi.merchant_name,fmi.product,fmi.merchant_account_money,fmi.freeze_funds,fmi.on_the_amount,fmi.day_into_golden,fmi.day_out_golden from fengmai_merchant_information fmi;
+
+    </select>
+
+    <select id="getPayInformationData" resultType="com.myd.entity.MerchantOrder">
+
+    select fmo.order_date,fmo.platform_order_id,fmo.merchant_id,fmo.merchant_name,fmo.merchant_order_id,fmo.order_money,fmo.poundage,fmo.product_type,fmo.bank_name,fmo.channel_abbreviation,fmo.channel_name,fmo.order_status,fmo.channel_status_code,fmo.status_details from fengmai_merchant_order fmo;
+
+    </select>
+
+    <select id="getMerchantIntoSum" resultType="com.myd.entity.MerchantInformation">
+
+        select fmi.merchant_id,fmi.merchant_name,fmi.product_type,SUM(fmi.transaction_amount)AS transaction_amount ,SUM(fmi.poundage)AS poundage,SUM(fmi.number)AS number from fengmai_merchant_information fmi GROUP BY fmi.merchant_id;
+
+    </select>
+
+    <select id="getMerchantPaidSum" resultType="com.myd.entity.MerchantInformation">
+
+      select fmi.merchant_id,fmi.merchant_name,fmi.qdchannel_type,SUM(fmi.transaction_amount) AS transaction_amount ,SUM(fmi.poundage) AS poundage ,SUM(fmi.number)AS number from fengmai_merchant_information fmi GROUP BY fmi.merchant_id;
+
+    </select>
+<!--  
+    <insert id="addMerchantOpen" parameterType="com.test.TestModel.MerchantServiceOpen">
+
+        insert into fengmai_merchant_service_open values(#{merchant_access_ip},#{settlement_cycle},#{netsilver_poundage_configuration})
+
+    </insert>
+    -->
+<!--  
+    <insert id="addChannelConfiguration" parameterType="com.test.TestModel.MerchantConfiguration">
+
+        insert into fengmai_channel_configuration values (#{product},#{channel_name},#{pay_channel},#{channle_merchant_id},#{channel_secretkey},#{rate_type},#{rate_value},#{liquidation_mode},#{maximum_transaction_amount},#{rate_range},#{channel_status})
+
+    </insert>
+    -->
+
+    <insert id="addMerchant" parameterType="com.myd.entity.MerchantInformation">
+
+        insert into fengmai_merchant_information (merchant_id,product,merchant_name,merchant_license_name,merchant_license_id,tax_registration_id,organization_certificate,registered_business_address,merchant_registered_money,company_nature,risk_level,licence_validity,mcc_type,province,city,office_address,legalperson_name,document_type,certificate_id,certificate_validity,contact_name,contact_phone,contact_email,deposit_bank,account_type,deposit_name,deposit_id_number) values (#{merchant_id},#{product},#{merchant_name},#{merchant_license_name},#{merchant_license_id},#{tax_registration_id},#{organization_certificate},#{registered_business_address},#{merchant_registered_money},#{company_nature},#{risk_level},#{licence_validity},#{mcc_type},#{province},#{city},#{office_address},#{legalperson_name},#{document_type},#{certificate_id},#{certificate_validity},#{contact_name},#{contact_phone},#{contact_email},#{deposit_bank},#{account_type},#{deposit_name},#{deposit_id_number})
+
+    </insert>
+
+
+</mapper>

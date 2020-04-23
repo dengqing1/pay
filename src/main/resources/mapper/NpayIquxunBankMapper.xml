@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayIquxunBankMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayIquxunBank" >
+    <id column="z_bank_id" property="zBankId" jdbcType="VARCHAR" />
+    <result column="bank_id" property="bankId" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    z_bank_id, bank_id, bank_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_iquxun_bank
+    where z_bank_id = #{zBankId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from npay_iquxun_bank
+    where z_bank_id = #{zBankId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayIquxunBank" >
+    insert into npay_iquxun_bank (z_bank_id, bank_id, bank_name
+      )
+    values (#{zBankId,jdbcType=VARCHAR}, #{bankId,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayIquxunBank" >
+    insert into npay_iquxun_bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zBankId != null" >
+        z_bank_id,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zBankId != null" >
+        #{zBankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayIquxunBank" >
+    update npay_iquxun_bank
+    <set >
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where z_bank_id = #{zBankId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayIquxunBank" >
+    update npay_iquxun_bank
+    set bank_id = #{bankId,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR}
+    where z_bank_id = #{zBankId,jdbcType=VARCHAR}
+  </update>
+</mapper>

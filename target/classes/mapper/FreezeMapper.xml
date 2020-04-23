@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.FreezeMapper">
+	<insert id="insert" parameterType="com.myd.entity.Freeze">
+		 insert into freeze (freeze_merchantId, freeze_merchantName, freeze_balance, 
+		      freeze_block_balance, freeze_amount, freeze_note,freeze_time,freeze_state)
+		    values (
+		      #{freezeMerchantId,jdbcType=VARCHAR}, 
+		      #{freezemerchantName,jdbcType=VARCHAR},
+		      #{freezeBalance,jdbcType=VARCHAR},
+		      #{freezeBlockBalance,jdbcType=VARCHAR},
+		      #{freezeAmount,jdbcType=VARCHAR},
+		      #{freezeNote,jdbcType=VARCHAR},
+		      #{freezeTime,jdbcType=VARCHAR},
+		      #{freezeState,jdbcType=VARCHAR})
+	</insert>
+	<select id="selectByFreeze" resultType="map" parameterType="map">
+		select * from freeze
+	</select>
+</mapper>

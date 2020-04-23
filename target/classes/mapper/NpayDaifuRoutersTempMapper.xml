@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayDaifuRoutersTempMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayDaifuRoutersTemp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="merchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="VARCHAR" />
+    <result column="gt" property="gt" jdbcType="INTEGER" />
+    <result column="lt" property="lt" jdbcType="INTEGER" />
+    <result column="channelAbbr" property="channelabbr" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myd.entity.NpayDaifuRoutersTemp" extends="BaseResultMap" >
+    <result column="channelMerId" property="channelmerid" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchantId, bankId, gt, lt, channelAbbr
+  </sql>
+  <sql id="Blob_Column_List" >
+    channelMerId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from npay_daifu_routers_temp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from npay_daifu_routers_temp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayDaifuRoutersTemp" >
+    insert into npay_daifu_routers_temp (id, merchantId, bankId, 
+      gt, lt, channelAbbr, 
+      channelMerId)
+    values (#{id,jdbcType=INTEGER}, #{merchantid,jdbcType=VARCHAR}, #{bankid,jdbcType=VARCHAR}, 
+      #{gt,jdbcType=INTEGER}, #{lt,jdbcType=INTEGER}, #{channelabbr,jdbcType=VARCHAR}, 
+      #{channelmerid,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayDaifuRoutersTemp" >
+    insert into npay_daifu_routers_temp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="merchantid != null" >
+        merchantId,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="gt != null" >
+        gt,
+      </if>
+      <if test="lt != null" >
+        lt,
+      </if>
+      <if test="channelabbr != null" >
+        channelAbbr,
+      </if>
+      <if test="channelmerid != null" >
+        channelMerId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="gt != null" >
+        #{gt,jdbcType=INTEGER},
+      </if>
+      <if test="lt != null" >
+        #{lt,jdbcType=INTEGER},
+      </if>
+      <if test="channelabbr != null" >
+        #{channelabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelmerid != null" >
+        #{channelmerid,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayDaifuRoutersTemp" >
+    update npay_daifu_routers_temp
+    <set >
+      <if test="merchantid != null" >
+        merchantId = #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="gt != null" >
+        gt = #{gt,jdbcType=INTEGER},
+      </if>
+      <if test="lt != null" >
+        lt = #{lt,jdbcType=INTEGER},
+      </if>
+      <if test="channelabbr != null" >
+        channelAbbr = #{channelabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelmerid != null" >
+        channelMerId = #{channelmerid,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myd.entity.NpayDaifuRoutersTemp" >
+    update npay_daifu_routers_temp
+    set merchantId = #{merchantid,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=VARCHAR},
+      gt = #{gt,jdbcType=INTEGER},
+      lt = #{lt,jdbcType=INTEGER},
+      channelAbbr = #{channelabbr,jdbcType=VARCHAR},
+      channelMerId = #{channelmerid,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayDaifuRoutersTemp" >
+    update npay_daifu_routers_temp
+    set merchantId = #{merchantid,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=VARCHAR},
+      gt = #{gt,jdbcType=INTEGER},
+      lt = #{lt,jdbcType=INTEGER},
+      channelAbbr = #{channelabbr,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByRoutersTemp" parameterType="map" resultType="map">
+  		SELECT 
+			n.merchantId,
+			n.channelMerId,
+			n.id,
+			n.bankId,
+			n.channelAbbr,
+			n.gt min,
+			n.lt max,
+			m.mer_short_name,
+			t.bank_name
+			FROM npay_daifu_routers_temp n
+			LEFT JOIN npay_mer_info m
+			ON m.mer_id = n.merchantId
+			LEFT JOIN npay_tf56_bank t
+			ON t.bank_id = n.bankId
+			ORDER BY n.id ASC
+  </select>
+</mapper>

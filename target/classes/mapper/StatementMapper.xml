@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.StatementMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.Statement" >
+    <id column="sta_id" property="staId" jdbcType="INTEGER" />
+    <result column="sta_merchantId" property="staMerchantId" jdbcType="VARCHAR" />
+    <result column="golden" property="golden" jdbcType="VARCHAR" />
+    <result column="withdraw" property="withdraw" jdbcType="VARCHAR" />
+    <result column="unpaid" property="unpaid" jdbcType="VARCHAR" />
+    <result column="nothing" property="nothing" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sta_id,sta_merchantId, golden, withdraw, unpaid, nothing, date
+  </sql>
+  
+  
+  
+    <select id="selectByList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    sta_id,
+    sta_merchantId,
+	    cast( golden / 100 AS DECIMAL (18, 2) ) golden,
+	    cast( withdraw / 100 AS DECIMAL (18, 2) ) withdraw,
+	    cast( unpaid / 100 AS DECIMAL (18, 2) ) unpaid,
+	    cast( nothing / 100 AS DECIMAL (18, 2) ) nothing,
+    date
+    from statement
+    <where>
+    <if test="_parameter != null and _parameter != ''">
+    	date =#{str}
+    
+    </if>
+    
+    </where>
+    
+    ORDER BY date DESC
+  	</select>
+  
+  
+    <select id="selectCheckDate" resultMap="BaseResultMap" >
+    select     *    from statement   where  date = #{str} 
+    
+  	</select>
+  
+  
+    <select id="selectOrder" resultType="map" parameterType="java.lang.String" >
+    		SELECT distinct 
+			npay.merchantId merchantId,
+			(select SUM(o.txnAmt) 	FROM 			npay_order o		
+			WHERE			o.gateway NOT IN ('daifu')		AND o.`status` = '1001'
+			AND DATE_FORMAT(create_at, '%Y-%m-%d') = #{str} 
+			AND npay.merchantId = o.merchantId
+			) rujin,
+			(select SUM(o.txnAmt)	FROM 			npay_order o		
+			WHERE			o.gateway NOT IN ('daifu')		AND o.`status` = '1000'
+			AND DATE_FORMAT(create_at, '%Y-%m-%d') = #{str}
+			AND npay.merchantId = o.merchantId	
+			) daizhifu,
+			(select SUM(o.txnAmt)	FROM 			npay_order o		
+			WHERE			o.gateway NOT IN ('daifu')		AND o.`status` = '1002'
+			AND DATE_FORMAT(create_at, '%Y-%m-%d') =#{str} 
+			AND npay.merchantId = o.merchantId
+			) shibai,
+			(select SUM(o.txnAmt) 	FROM 			npay_order o		
+			WHERE			o.gateway = 'daifu'	AND o.`status` = '1001'
+			AND DATE_FORMAT(create_at, '%Y-%m-%d') = #{str} 
+			AND npay.merchantId = o.merchantId
+			) chujin
+			
+		FROM
+			npay_order npay
+		WHERE			
+		DATE_FORMAT(create_at, '%Y-%m-%d') = #{str}
+		GROUP BY
+			npay.merchantId
+  	</select>
+  
+  
+  
+  
+  
+    <select id="selectOneMerchant" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    sta_id,
+    sta_merchantId,
+	    cast( golden / 100 AS DECIMAL (18, 2) ) golden,
+	    cast( withdraw / 100 AS DECIMAL (18, 2) ) withdraw,
+	    cast( unpaid / 100 AS DECIMAL (18, 2) ) unpaid,
+	    cast( nothing / 100 AS DECIMAL (18, 2) ) nothing,
+    date
+    from statement
+    where
+    	sta_merchantId =#{str}
+    
+    ORDER BY date DESC
+  	</select>
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from statement
+    where sta_id = #{staId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from statement
+    where sta_id = #{staId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.Statement" >
+    insert into statement (sta_id,sta_merchantId, golden, withdraw, 
+      unpaid, nothing, date
+      )
+    values (#{staId,jdbcType=INTEGER},#{staMerchantId,jdbcType=VARCHAR}, #{golden,jdbcType=VARCHAR}, #{withdraw,jdbcType=VARCHAR}, 
+      #{unpaid,jdbcType=VARCHAR}, #{nothing,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.Statement" >
+    update statement
+    set sta_merchantId = #{staMerchantId,jdbcType=VARCHAR},
+   	  golden = #{golden,jdbcType=VARCHAR},
+      withdraw = #{withdraw,jdbcType=VARCHAR},
+      unpaid = #{unpaid,jdbcType=VARCHAR},
+      nothing = #{nothing,jdbcType=VARCHAR},
+      date = #{date,jdbcType=VARCHAR}
+    where sta_id = #{staId,jdbcType=INTEGER}
+  </update>
+</mapper>

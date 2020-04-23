@@ -1,0 +1,214 @@
+/* main right */
+.main-right {
+    margin-left: 36px;
+    margin-top: 10px;
+}
+.right-container {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 5px;
+}
+.right-header-title {
+    font-size: 18px;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+}
+.right-header-separate {
+    background-color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+    width: 2px;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.right-separate {
+    background-color: #0691c9;
+    height: 2px;
+    width: 910px;
+    margin-top: 5px;
+    margin-bottom: 16px;
+    margin-left: 5px;
+}
+
+/* 搜索条件 */
+.search-container {
+    width: 702px;
+    height: 109px;
+    border-radius: 8px;
+    border: 1px solid #0691c9;
+}
+.search-container-top {
+    height: 35px;
+    background-color: #d1eefa;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.search-top-title {
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #010101;
+    filter:alpha(opacity=90);
+    -moz-opacity:0.90;
+    -khtml-opacity: 0.90;
+    opacity: 0.90;
+}
+.search-container-bottom {
+    height: 74px;
+}
+.search-bottom-title {
+    font-size: 12px;
+    color: #010101;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+}
+.clearing-date {
+    margin-left: 35px;
+}
+.date-from-title {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.date-end-title {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.search-bottom-time {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    background-color: #c7eaf9;
+    width: 220px;
+    border-radius: 8px;
+}
+.search-btn {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 9px;
+    width: 43px;
+    font-size: 14px;
+    color: #fff;
+    background: url(./merchant/image/button_bg.png) no-repeat 100% 100%;    
+}
+
+/* 具体内容 */
+/* 具体数据 */
+.content-container {
+    margin-top: 25px;
+    width: 938px;
+    min-height: 134px;
+    border-radius: 8px;
+    border: 1px solid #0691c9;
+}
+.top-container {
+    height: 34px;
+    background-color: #41bff1;
+    filter:alpha(opacity=32);
+    -moz-opacity:0.32;
+    -khtml-opacity: 0.32;
+    opacity: 0.32;
+}
+.container-line {
+    width: 917px;
+    height: 1px;
+    margin-left: 10px;
+    background-color: #0691c9;
+}
+.ace-widget-content {
+    padding: 10px;
+    overflow: auto;
+}
+table {
+    max-width:100%;
+    background-color:transparent;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+.ace-grid {
+    width: 100%;
+    margin: 0;
+}
+.ace-grid thead th {
+    font-size: 12px;
+    text-align: center;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+    border: solid #0691c9;
+    border-width: 0 0 1px;
+}
+.ace-grid thead th,
+.ace-grid tfoot th {
+    padding: 7px 8px;
+}
+.table thead th {
+    vertical-align: bottom;
+}
+.ace-grid th, .ace-grid td {
+    white-space: nowrap;
+}
+.table-striped tbody>tr>td {
+    height: 32px;
+    line-height: 32px;
+}
+.table-striped tbody>tr:nth-child(odd)>td {
+    background-color: #d3f1fa;
+}
+.table-striped tbody>tr:nth-child(even)>td {
+    background-color: #fbfbfb;
+}
+.ace-grid td {
+    padding: 0 8px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+}
+.table-grid-status {
+    border-radius: 8px;
+    color: #fff;
+    padding: 2px 4px;
+}
+.table-grid-gray-status {
+    background-color: #989898;
+}
+.table-grid-light-status {
+    background-color: #337134;
+}
+.header-th {
+    margin-left: 28px;
+    font-size: 14px;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+}
+.share-container {
+    margin-top: 20px;
+    width: 640px;
+}
+.share-btn {
+    display: block;
+    width: 49px;
+    height: 30px;
+/*     background: url(../image/share_bg.png) no-repeat 100% 100%;     */
+}

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayRoutersMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayRouters" >
+    <id column="router_id" property="routerId" jdbcType="INTEGER" />
+    <result column="mer_id" property="merId" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="INTEGER" />
+    <result column="gateway" property="gateway" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    router_id, mer_id, channel_id, create_time, update_time, gateway
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_routers
+    where router_id = #{routerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from npay_routers
+    where router_id = #{routerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayRouters" >
+    insert into npay_routers (router_id, mer_id, channel_id, 
+      create_time, update_time, gateway
+      )
+    values (#{routerId,jdbcType=INTEGER}, #{merId,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=INTEGER}, #{updateTime,jdbcType=INTEGER}, #{gateway,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayRouters" >
+    insert into npay_routers
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="routerId != null" >
+        router_id,
+      </if>
+      <if test="merId != null" >
+        mer_id,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="gateway != null" >
+        gateway,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="routerId != null" >
+        #{routerId,jdbcType=INTEGER},
+      </if>
+      <if test="merId != null" >
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="gateway != null" >
+        #{gateway,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayRouters" >
+    update npay_routers
+    <set >
+      <if test="merId != null" >
+        mer_id = #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+      <if test="gateway != null" >
+        gateway = #{gateway,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where router_id = #{routerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayRouters" >
+    update npay_routers
+    set mer_id = #{merId,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      gateway = #{gateway,jdbcType=VARCHAR}
+    where router_id = #{routerId,jdbcType=INTEGER}
+  </update>
+</mapper>

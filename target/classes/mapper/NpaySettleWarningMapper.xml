@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpaySettleWarningMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpaySettleWarning" >
+    <result column="orderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ab_balance" property="abBalance" jdbcType="INTEGER" />
+    <result column="ab_balance_available" property="abBalanceAvailable" jdbcType="INTEGER" />
+    <result column="ab_freeze_balance" property="abFreezeBalance" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="INTEGER" />
+    <result column="balance_available" property="balanceAvailable" jdbcType="INTEGER" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="INTEGER" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.NpaySettleWarning" >
+    insert into npay_settle_warning (orderId, create_time, ab_balance, 
+      ab_balance_available, ab_freeze_balance, balance, 
+      balance_available, freeze_balance, message
+      )
+    values (#{orderid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{abBalance,jdbcType=INTEGER}, 
+      #{abBalanceAvailable,jdbcType=INTEGER}, #{abFreezeBalance,jdbcType=INTEGER}, #{balance,jdbcType=INTEGER}, 
+      #{balanceAvailable,jdbcType=INTEGER}, #{freezeBalance,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpaySettleWarning" >
+    insert into npay_settle_warning
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="abBalance != null" >
+        ab_balance,
+      </if>
+      <if test="abBalanceAvailable != null" >
+        ab_balance_available,
+      </if>
+      <if test="abFreezeBalance != null" >
+        ab_freeze_balance,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="balanceAvailable != null" >
+        balance_available,
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="abBalance != null" >
+        #{abBalance,jdbcType=INTEGER},
+      </if>
+      <if test="abBalanceAvailable != null" >
+        #{abBalanceAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="abFreezeBalance != null" >
+        #{abFreezeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=INTEGER},
+      </if>
+      <if test="balanceAvailable != null" >
+        #{balanceAvailable,jdbcType=INTEGER},
+      </if>
+      <if test="freezeBalance != null" >
+        #{freezeBalance,jdbcType=INTEGER},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

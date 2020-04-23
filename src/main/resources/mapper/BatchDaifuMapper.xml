@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.BatchDaifuMapper" >
+
+
+	<select id="list" parameterType="map" resultType="com.myd.entity.BatchDaifu">
+  		SELECT id ,file_name fileName , status ,create_time createTime  from batch_daifu_list
+  		<where>
+  			<if test="merchantid != null and merchantid !=''">
+	  			and merch_id = '${merchantid}'
+	  		</if>
+  		</where>
+  		ORDER BY create_time DESC
+  		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+  </select>
+  
+  <select id="get" parameterType="com.myd.entity.BatchDaifu" resultType="com.myd.entity.BatchDaifu">
+  		SELECT id ,file_name fileName , status ,create_time createTime  from batch_daifu_list
+  		<where>
+  			<if test="id != null and id !=''">
+	  			and id = '${id}'
+	  		</if>
+	  		<if test="merchId != null and merchId !=''">
+	  			and merch_id = '${merchId}'
+	  		</if>
+	  		<if test="fileName != null and fileName !=''">
+	  			and file_name = '${fileName}'
+	  		</if>
+  		</where>
+  </select>
+  
+  
+  <select id="count" parameterType="map" resultType="int">
+  		SELECT count(1) FROM batch_daifu_list  
+  		<where>
+  			<if test="merchantid != null and merchantid !=''">
+	  			and merch_id = '${merchantid}'
+	  		</if>
+  		</where>
+  </select>
+
+  
+    <insert id="insert" parameterType="com.myd.entity.BatchDaifu" >
+    insert into batch_daifu_list (user_id, merch_id, file_name,
+    		extra,status,verified_by,`desc`,create_time,update_time)
+  	  values (
+  	  #{userId}, #{merchId}, 
+  	  #{fileName}, #{extra},#{status},
+  	  #{verifiedBy},#{desc},#{createTimeDate},#{updateTimeDate}
+      )
+  </insert>
+  
+  <update id="updateByExampleSelective" parameterType="com.myd.entity.BatchDaifu">
+  		UPDATE gather SET gather_state = #{gatherState},gather_update_time = #{gatherUpdateTime} WHERE gather_id = #{gatherId}
+  </update>
+  
+  <select id="selectByDaifu" parameterType="com.myd.entity.BatchDaifu" resultType="map">
+  		
+ 		SELECT n.gather_id gatherId,
+  			   n.gather_merchantId gatherMerchantId,
+  			   n.gather_merOrderId gatherMerOrderId,
+  			   cast(
+					n.gather_txnAmt / 100 AS DECIMAL (18, 2)
+				)  gatherTxnAmt,
+  			   n.gather_accno gatherAccno,
+			   n.gather_ppflag gatherPpflag,
+			   n.gather_customerName gatherCustomerName,
+			   n.gather_bankId gatherBankId,
+			   n.gather_phoneNo gatherPhoneNo ,
+			   CAST(CAST(n.gather_txnAmt AS DECIMAL(18,2))/100 AS DECIMAL(18,2)) txnAmts,
+			   n.gather_time gatherTime,
+			   n.gather_update_time gatherUpdateTime,
+			   n.gather_state gatherState,
+			   n.gather_key gatherKey,
+			   m.mer_short_name msName,
+			   t.bank_name bankName
+		FROM gather n 
+		LEFT JOIN npay_mer_info m  ON m.mer_id  = n.gather_merchantId
+		LEFT JOIN npay_tf56_bank t ON t.bank_id = n.gather_bankId  
+		
+		<where>
+  			<if test="gatherMerchantId != null and gatherMerchantId !=''">
+	  			and n.gather_merchantId = #{gatherMerchantId}
+	  		</if>
+	  		<if test="gatherMerOrderId != null and gatherMerOrderId !=''">
+	  			and n.gather_merOrderId = #{gatherMerOrderId}
+	  		</if>
+	  		<if test="gatherState != null and gatherState !=''">
+	  			and n.gather_state = #{gatherState}
+	  		</if>
+  		</where>
+		ORDER BY n.gather_time desc
+		
+		
+		
+		
+  </select>
+  
+  
+  
+</mapper>

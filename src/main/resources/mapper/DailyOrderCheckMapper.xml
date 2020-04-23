@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.DailyOrderCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.DailyOrderCheck" >
+    <result column="orderid" property="orderid" jdbcType="VARCHAR" />
+    <result column="t1" property="t1" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gateway" property="gateway" jdbcType="VARCHAR" />
+    <result column="txnamt" property="txnamt" jdbcType="INTEGER" />
+    <result column="amt" property="amt" jdbcType="INTEGER" />
+    <result column="bb" property="bb" jdbcType="DECIMAL" />
+    <result column="aa" property="aa" jdbcType="DECIMAL" />
+    <result column="ff" property="ff" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.DailyOrderCheck" >
+    insert into daily_order_check (orderid, t1, status, 
+      gateway, txnamt, amt, 
+      bb, aa, ff)
+    values (#{orderid,jdbcType=VARCHAR}, #{t1,jdbcType=TINYINT}, #{status,jdbcType=INTEGER}, 
+      #{gateway,jdbcType=VARCHAR}, #{txnamt,jdbcType=INTEGER}, #{amt,jdbcType=INTEGER}, 
+      #{bb,jdbcType=DECIMAL}, #{aa,jdbcType=DECIMAL}, #{ff,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.DailyOrderCheck" >
+    insert into daily_order_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="t1 != null" >
+        t1,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gateway != null" >
+        gateway,
+      </if>
+      <if test="txnamt != null" >
+        txnamt,
+      </if>
+      <if test="amt != null" >
+        amt,
+      </if>
+      <if test="bb != null" >
+        bb,
+      </if>
+      <if test="aa != null" >
+        aa,
+      </if>
+      <if test="ff != null" >
+        ff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="t1 != null" >
+        #{t1,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gateway != null" >
+        #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null" >
+        #{txnamt,jdbcType=INTEGER},
+      </if>
+      <if test="amt != null" >
+        #{amt,jdbcType=INTEGER},
+      </if>
+      <if test="bb != null" >
+        #{bb,jdbcType=DECIMAL},
+      </if>
+      <if test="aa != null" >
+        #{aa,jdbcType=DECIMAL},
+      </if>
+      <if test="ff != null" >
+        #{ff,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayReconCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayReconComment" >
+    <result column="report_dt" property="reportDt" jdbcType="DATE" />
+    <result column="channel_mer_id" property="channelMerId" jdbcType="BIGINT" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="merber_id" property="merberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="CHAR" />
+    <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.NpayReconComment" >
+    insert into npay_recon_comment (report_dt, channel_mer_id, comment, 
+      merber_id, member_name, comment_time
+      )
+    values (#{reportDt,jdbcType=DATE}, #{channelMerId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, 
+      #{merberId,jdbcType=INTEGER}, #{memberName,jdbcType=CHAR}, #{commentTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayReconComment" >
+    insert into npay_recon_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportDt != null" >
+        report_dt,
+      </if>
+      <if test="channelMerId != null" >
+        channel_mer_id,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="merberId != null" >
+        merber_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="commentTime != null" >
+        comment_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportDt != null" >
+        #{reportDt,jdbcType=DATE},
+      </if>
+      <if test="channelMerId != null" >
+        #{channelMerId,jdbcType=BIGINT},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="merberId != null" >
+        #{merberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=CHAR},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

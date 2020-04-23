@@ -1,0 +1,64 @@
+.page-container {
+    margin: 20px 0 14px 10px;
+    height: 21px;
+    line-height:21px;
+}
+.page-container a {
+    display: block;
+    width: 14px;
+    height: 14px;
+}
+.page-container input {
+    display: block;
+}
+.page-desc {
+    font-size: 12px;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+}
+.first-page {
+    margin-left: 15px;
+    margin-right: 9px;
+    background: url(../image/icon.png) no-repeat 100% 100%;
+    background-position: -192px -72px;
+}
+.previous-page {
+    margin-right:14px;
+    background: url(../image/icon.png) no-repeat 100% 100%;
+    background-position: -432px -72px;
+}
+.next-page {
+    margin-left: 14px;
+    background: url(../image/icon.png) no-repeat 100% 100%;
+    background-position: -384px -72px;
+}
+.last-page {
+    margin-left: 9px;
+    background: url(../image/icon.png) no-repeat 100% 100%;
+    background-position: -456px -72px;
+
+}
+.page-num {
+    width: 28px;
+    height: 19px;
+    border: 1px solid #b6b4b5;
+    -webkit-border-radius:;
+    -moz-border-radius:;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #000;
+    filter:alpha(opacity=85);
+    -moz-opacity:0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+    text-align: center;
+}
+.gray-icon-page {
+    filter:alpha(opacity=30);
+    -moz-opacity:0.3;
+    -khtml-opacity: 0.3;
+    opacity: 0.3;
+}

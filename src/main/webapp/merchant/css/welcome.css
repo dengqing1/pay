@@ -1,0 +1,35 @@
+/* right container */
+.main-right {
+    margin-left: 80px;
+    margin-top: 60px;
+}
+.welcome-container {
+    border-radius: 8px;
+    border: 1px solid #0691c9;
+    height: 41px;
+    line-height: 41px;
+    width: 360px;
+    margin-bottom: 29px;
+}
+.welcome-title {
+    font-size: 14px;
+    color: #010101;
+    filter:alpha(opacity=85);   
+    -moz-opacity:0.85;   
+    -khtml-opacity: 0.85;   
+    opacity: 0.85;
+    margin-left: 16px;
+}
+.money-num {
+    margin-left: 5px;
+}
+.account-name {
+    height: 24px;
+    line-height: 24px;
+    border-radius: 8px;
+    background-color: #0691c9;
+    font-size: 14px;
+    color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+}

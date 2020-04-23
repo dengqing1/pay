@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpaySubPaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpaySubPayment" >
+    <id column="oid" property="oid" jdbcType="INTEGER" />
+    <id column="orderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="merchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="merOrderId" property="merorderid" jdbcType="VARCHAR" />
+    <result column="txnAmt" property="txnamt" jdbcType="INTEGER" />
+    <result column="frontUrl" property="fronturl" jdbcType="VARCHAR" />
+    <result column="backUrl" property="backurl" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+    <result column="merResv1" property="merresv1" jdbcType="VARCHAR" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="signature" property="signature" jdbcType="VARCHAR" />
+    <result column="signMethod" property="signmethod" jdbcType="VARCHAR" />
+    <result column="txnType" property="txntype" jdbcType="VARCHAR" />
+    <result column="txnSubType" property="txnsubtype" jdbcType="VARCHAR" />
+    <result column="bizType" property="biztype" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="accessType" property="accesstype" jdbcType="VARCHAR" />
+    <result column="accessMode" property="accessmode" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="payType" property="paytype" jdbcType="VARCHAR" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="txnTime" property="txntime" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gateway" property="gateway" jdbcType="VARCHAR" />
+    <result column="customerIp" property="customerip" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="VARCHAR" />
+    <result column="dcType" property="dctype" jdbcType="TINYINT" />
+    <result column="notifytimes" property="notifytimes" jdbcType="INTEGER" />
+    <result column="statusDesc" property="statusdesc" jdbcType="VARCHAR" />
+    <result column="refundTimes" property="refundtimes" jdbcType="TINYINT" />
+    <result column="refundOrderid" property="refundorderid" jdbcType="VARCHAR" />
+    <result column="in_fee_amount" property="inFeeAmount" jdbcType="VARCHAR" />
+    <result column="in_fee" property="inFee" jdbcType="VARCHAR" />
+    <result column="in_fee_type" property="inFeeType" jdbcType="VARCHAR" />
+    <result column="out_fee_type" property="outFeeType" jdbcType="VARCHAR" />
+    <result column="out_fee" property="outFee" jdbcType="VARCHAR" />
+    <result column="out_fee_amount" property="outFeeAmount" jdbcType="VARCHAR" />
+    <result column="channel_mer_abbr" property="channelMerAbbr" jdbcType="VARCHAR" />
+    <result column="channel_id" property="channelId" jdbcType="VARCHAR" />
+    <result column="channel_mer_id" property="channelMerId" jdbcType="VARCHAR" />
+    <result column="accNo" property="accno" jdbcType="VARCHAR" />
+    <result column="customerInfo" property="customerinfo" jdbcType="VARCHAR" />
+    <result column="ppFlag" property="ppflag" jdbcType="VARCHAR" />
+    <result column="notifysuccess" property="notifysuccess" jdbcType="BIT" />
+    <result column="check_status" property="checkStatus" jdbcType="INTEGER" />
+    <result column="cstatus" property="cstatus" jdbcType="VARCHAR" />
+    <result column="last_update" property="lastUpdate" jdbcType="TIMESTAMP" />
+    <result column="t1" property="t1" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oid, orderId, merchantId, merOrderId, txnAmt, frontUrl, backUrl, subject, body, merResv1, 
+    userId, signature, signMethod, txnType, txnSubType, bizType, version, create_at, 
+    accessType, accessMode, currency, payType, update_at, txnTime, status, gateway, customerIp, 
+    bankId, dcType, notifytimes, statusDesc, refundTimes, refundOrderid, in_fee_amount, 
+    in_fee, in_fee_type, out_fee_type, out_fee, out_fee_amount, channel_mer_abbr, channel_id, 
+    channel_mer_id, accNo, customerInfo, ppFlag, notifysuccess, check_status, cstatus, 
+    last_update, t1
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.myd.entity.NpaySubPaymentKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_sub_payment
+    where oid = #{oid,jdbcType=INTEGER}
+      and orderId = #{orderid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.myd.entity.NpaySubPaymentKey" >
+    delete from npay_sub_payment
+    where oid = #{oid,jdbcType=INTEGER}
+      and orderId = #{orderid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpaySubPayment" >
+    insert into npay_sub_payment (oid, orderId, merchantId, 
+      merOrderId, txnAmt, frontUrl, 
+      backUrl, subject, body, 
+      merResv1, userId, signature, 
+      signMethod, txnType, txnSubType, 
+      bizType, version, create_at, 
+      accessType, accessMode, currency, 
+      payType, update_at, txnTime, 
+      status, gateway, customerIp, 
+      bankId, dcType, notifytimes, 
+      statusDesc, refundTimes, refundOrderid, 
+      in_fee_amount, in_fee, in_fee_type, 
+      out_fee_type, out_fee, out_fee_amount, 
+      channel_mer_abbr, channel_id, channel_mer_id, 
+      accNo, customerInfo, ppFlag, 
+      notifysuccess, check_status, cstatus, 
+      last_update, t1)
+    values (#{oid,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, #{merchantid,jdbcType=VARCHAR}, 
+      #{merorderid,jdbcType=VARCHAR}, #{txnamt,jdbcType=INTEGER}, #{fronturl,jdbcType=VARCHAR}, 
+      #{backurl,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, 
+      #{merresv1,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{signmethod,jdbcType=VARCHAR}, #{txntype,jdbcType=VARCHAR}, #{txnsubtype,jdbcType=VARCHAR}, 
+      #{biztype,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{accesstype,jdbcType=VARCHAR}, #{accessmode,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, 
+      #{paytype,jdbcType=VARCHAR}, #{updateAt,jdbcType=TIMESTAMP}, #{txntime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{gateway,jdbcType=VARCHAR}, #{customerip,jdbcType=VARCHAR}, 
+      #{bankid,jdbcType=VARCHAR}, #{dctype,jdbcType=TINYINT}, #{notifytimes,jdbcType=INTEGER}, 
+      #{statusdesc,jdbcType=VARCHAR}, #{refundtimes,jdbcType=TINYINT}, #{refundorderid,jdbcType=VARCHAR}, 
+      #{inFeeAmount,jdbcType=VARCHAR}, #{inFee,jdbcType=VARCHAR}, #{inFeeType,jdbcType=VARCHAR}, 
+      #{outFeeType,jdbcType=VARCHAR}, #{outFee,jdbcType=VARCHAR}, #{outFeeAmount,jdbcType=VARCHAR}, 
+      #{channelMerAbbr,jdbcType=VARCHAR}, #{channelId,jdbcType=VARCHAR}, #{channelMerId,jdbcType=VARCHAR}, 
+      #{accno,jdbcType=VARCHAR}, #{customerinfo,jdbcType=VARCHAR}, #{ppflag,jdbcType=VARCHAR}, 
+      #{notifysuccess,jdbcType=BIT}, #{checkStatus,jdbcType=INTEGER}, #{cstatus,jdbcType=VARCHAR}, 
+      #{lastUpdate,jdbcType=TIMESTAMP}, #{t1,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpaySubPayment" >
+    insert into npay_sub_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="merchantid != null" >
+        merchantId,
+      </if>
+      <if test="merorderid != null" >
+        merOrderId,
+      </if>
+      <if test="txnamt != null" >
+        txnAmt,
+      </if>
+      <if test="fronturl != null" >
+        frontUrl,
+      </if>
+      <if test="backurl != null" >
+        backUrl,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="merresv1 != null" >
+        merResv1,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="signature != null" >
+        signature,
+      </if>
+      <if test="signmethod != null" >
+        signMethod,
+      </if>
+      <if test="txntype != null" >
+        txnType,
+      </if>
+      <if test="txnsubtype != null" >
+        txnSubType,
+      </if>
+      <if test="biztype != null" >
+        bizType,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="accesstype != null" >
+        accessType,
+      </if>
+      <if test="accessmode != null" >
+        accessMode,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="paytype != null" >
+        payType,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="txntime != null" >
+        txnTime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gateway != null" >
+        gateway,
+      </if>
+      <if test="customerip != null" >
+        customerIp,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="dctype != null" >
+        dcType,
+      </if>
+      <if test="notifytimes != null" >
+        notifytimes,
+      </if>
+      <if test="statusdesc != null" >
+        statusDesc,
+      </if>
+      <if test="refundtimes != null" >
+        refundTimes,
+      </if>
+      <if test="refundorderid != null" >
+        refundOrderid,
+      </if>
+      <if test="inFeeAmount != null" >
+        in_fee_amount,
+      </if>
+      <if test="inFee != null" >
+        in_fee,
+      </if>
+      <if test="inFeeType != null" >
+        in_fee_type,
+      </if>
+      <if test="outFeeType != null" >
+        out_fee_type,
+      </if>
+      <if test="outFee != null" >
+        out_fee,
+      </if>
+      <if test="outFeeAmount != null" >
+        out_fee_amount,
+      </if>
+      <if test="channelMerAbbr != null" >
+        channel_mer_abbr,
+      </if>
+      <if test="channelId != null" >
+        channel_id,
+      </if>
+      <if test="channelMerId != null" >
+        channel_mer_id,
+      </if>
+      <if test="accno != null" >
+        accNo,
+      </if>
+      <if test="customerinfo != null" >
+        customerInfo,
+      </if>
+      <if test="ppflag != null" >
+        ppFlag,
+      </if>
+      <if test="notifysuccess != null" >
+        notifysuccess,
+      </if>
+      <if test="checkStatus != null" >
+        check_status,
+      </if>
+      <if test="cstatus != null" >
+        cstatus,
+      </if>
+      <if test="lastUpdate != null" >
+        last_update,
+      </if>
+      <if test="t1 != null" >
+        t1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="merorderid != null" >
+        #{merorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null" >
+        #{txnamt,jdbcType=INTEGER},
+      </if>
+      <if test="fronturl != null" >
+        #{fronturl,jdbcType=VARCHAR},
+      </if>
+      <if test="backurl != null" >
+        #{backurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="merresv1 != null" >
+        #{merresv1,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="signmethod != null" >
+        #{signmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null" >
+        #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="txnsubtype != null" >
+        #{txnsubtype,jdbcType=VARCHAR},
+      </if>
+      <if test="biztype != null" >
+        #{biztype,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accesstype != null" >
+        #{accesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="accessmode != null" >
+        #{accessmode,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null" >
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txntime != null" >
+        #{txntime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gateway != null" >
+        #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="customerip != null" >
+        #{customerip,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="dctype != null" >
+        #{dctype,jdbcType=TINYINT},
+      </if>
+      <if test="notifytimes != null" >
+        #{notifytimes,jdbcType=INTEGER},
+      </if>
+      <if test="statusdesc != null" >
+        #{statusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtimes != null" >
+        #{refundtimes,jdbcType=TINYINT},
+      </if>
+      <if test="refundorderid != null" >
+        #{refundorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="inFeeAmount != null" >
+        #{inFeeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="inFee != null" >
+        #{inFee,jdbcType=VARCHAR},
+      </if>
+      <if test="inFeeType != null" >
+        #{inFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="outFeeType != null" >
+        #{outFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="outFee != null" >
+        #{outFee,jdbcType=VARCHAR},
+      </if>
+      <if test="outFeeAmount != null" >
+        #{outFeeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerAbbr != null" >
+        #{channelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerId != null" >
+        #{channelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="accno != null" >
+        #{accno,jdbcType=VARCHAR},
+      </if>
+      <if test="customerinfo != null" >
+        #{customerinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ppflag != null" >
+        #{ppflag,jdbcType=VARCHAR},
+      </if>
+      <if test="notifysuccess != null" >
+        #{notifysuccess,jdbcType=BIT},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cstatus != null" >
+        #{cstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdate != null" >
+        #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="t1 != null" >
+        #{t1,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpaySubPayment" >
+    update npay_sub_payment
+    <set >
+      <if test="merchantid != null" >
+        merchantId = #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="merorderid != null" >
+        merOrderId = #{merorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="txnamt != null" >
+        txnAmt = #{txnamt,jdbcType=INTEGER},
+      </if>
+      <if test="fronturl != null" >
+        frontUrl = #{fronturl,jdbcType=VARCHAR},
+      </if>
+      <if test="backurl != null" >
+        backUrl = #{backurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="merresv1 != null" >
+        merResv1 = #{merresv1,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="signmethod != null" >
+        signMethod = #{signmethod,jdbcType=VARCHAR},
+      </if>
+      <if test="txntype != null" >
+        txnType = #{txntype,jdbcType=VARCHAR},
+      </if>
+      <if test="txnsubtype != null" >
+        txnSubType = #{txnsubtype,jdbcType=VARCHAR},
+      </if>
+      <if test="biztype != null" >
+        bizType = #{biztype,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accesstype != null" >
+        accessType = #{accesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="accessmode != null" >
+        accessMode = #{accessmode,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null" >
+        payType = #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txntime != null" >
+        txnTime = #{txntime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gateway != null" >
+        gateway = #{gateway,jdbcType=VARCHAR},
+      </if>
+      <if test="customerip != null" >
+        customerIp = #{customerip,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="dctype != null" >
+        dcType = #{dctype,jdbcType=TINYINT},
+      </if>
+      <if test="notifytimes != null" >
+        notifytimes = #{notifytimes,jdbcType=INTEGER},
+      </if>
+      <if test="statusdesc != null" >
+        statusDesc = #{statusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="refundtimes != null" >
+        refundTimes = #{refundtimes,jdbcType=TINYINT},
+      </if>
+      <if test="refundorderid != null" >
+        refundOrderid = #{refundorderid,jdbcType=VARCHAR},
+      </if>
+      <if test="inFeeAmount != null" >
+        in_fee_amount = #{inFeeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="inFee != null" >
+        in_fee = #{inFee,jdbcType=VARCHAR},
+      </if>
+      <if test="inFeeType != null" >
+        in_fee_type = #{inFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="outFeeType != null" >
+        out_fee_type = #{outFeeType,jdbcType=VARCHAR},
+      </if>
+      <if test="outFee != null" >
+        out_fee = #{outFee,jdbcType=VARCHAR},
+      </if>
+      <if test="outFeeAmount != null" >
+        out_fee_amount = #{outFeeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerAbbr != null" >
+        channel_mer_abbr = #{channelMerAbbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelId != null" >
+        channel_id = #{channelId,jdbcType=VARCHAR},
+      </if>
+      <if test="channelMerId != null" >
+        channel_mer_id = #{channelMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="accno != null" >
+        accNo = #{accno,jdbcType=VARCHAR},
+      </if>
+      <if test="customerinfo != null" >
+        customerInfo = #{customerinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ppflag != null" >
+        ppFlag = #{ppflag,jdbcType=VARCHAR},
+      </if>
+      <if test="notifysuccess != null" >
+        notifysuccess = #{notifysuccess,jdbcType=BIT},
+      </if>
+      <if test="checkStatus != null" >
+        check_status = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cstatus != null" >
+        cstatus = #{cstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdate != null" >
+        last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="t1 != null" >
+        t1 = #{t1,jdbcType=TINYINT},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+      and orderId = #{orderid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpaySubPayment" >
+    update npay_sub_payment
+    set merchantId = #{merchantid,jdbcType=VARCHAR},
+      merOrderId = #{merorderid,jdbcType=VARCHAR},
+      txnAmt = #{txnamt,jdbcType=INTEGER},
+      frontUrl = #{fronturl,jdbcType=VARCHAR},
+      backUrl = #{backurl,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      body = #{body,jdbcType=VARCHAR},
+      merResv1 = #{merresv1,jdbcType=VARCHAR},
+      userId = #{userid,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      signMethod = #{signmethod,jdbcType=VARCHAR},
+      txnType = #{txntype,jdbcType=VARCHAR},
+      txnSubType = #{txnsubtype,jdbcType=VARCHAR},
+      bizType = #{biztype,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      accessType = #{accesstype,jdbcType=VARCHAR},
+      accessMode = #{accessmode,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      payType = #{paytype,jdbcType=VARCHAR},
+      update_at = #{updateAt,jdbcType=TIMESTAMP},
+      txnTime = #{txntime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      gateway = #{gateway,jdbcType=VARCHAR},
+      customerIp = #{customerip,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=VARCHAR},
+      dcType = #{dctype,jdbcType=TINYINT},
+      notifytimes = #{notifytimes,jdbcType=INTEGER},
+      statusDesc = #{statusdesc,jdbcType=VARCHAR},
+      refundTimes = #{refundtimes,jdbcType=TINYINT},
+      refundOrderid = #{refundorderid,jdbcType=VARCHAR},
+      in_fee_amount = #{inFeeAmount,jdbcType=VARCHAR},
+      in_fee = #{inFee,jdbcType=VARCHAR},
+      in_fee_type = #{inFeeType,jdbcType=VARCHAR},
+      out_fee_type = #{outFeeType,jdbcType=VARCHAR},
+      out_fee = #{outFee,jdbcType=VARCHAR},
+      out_fee_amount = #{outFeeAmount,jdbcType=VARCHAR},
+      channel_mer_abbr = #{channelMerAbbr,jdbcType=VARCHAR},
+      channel_id = #{channelId,jdbcType=VARCHAR},
+      channel_mer_id = #{channelMerId,jdbcType=VARCHAR},
+      accNo = #{accno,jdbcType=VARCHAR},
+      customerInfo = #{customerinfo,jdbcType=VARCHAR},
+      ppFlag = #{ppflag,jdbcType=VARCHAR},
+      notifysuccess = #{notifysuccess,jdbcType=BIT},
+      check_status = #{checkStatus,jdbcType=INTEGER},
+      cstatus = #{cstatus,jdbcType=VARCHAR},
+      last_update = #{lastUpdate,jdbcType=TIMESTAMP},
+      t1 = #{t1,jdbcType=TINYINT}
+    where oid = #{oid,jdbcType=INTEGER}
+      and orderId = #{orderid,jdbcType=VARCHAR}
+  </update>
+</mapper>

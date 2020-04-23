@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayCheckOrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayCheckOrders" >
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="order_dt" property="orderDt" jdbcType="DATE" />
+    <result column="check_dt" property="checkDt" jdbcType="DATE" />
+    <result column="channel_mer_id1" property="channelMerId1" jdbcType="BIGINT" />
+    <result column="channel_mer_id2" property="channelMerId2" jdbcType="BIGINT" />
+    <result column="order_amt" property="orderAmt" jdbcType="INTEGER" />
+    <result column="channelpay_amt" property="channelpayAmt" jdbcType="INTEGER" />
+    <result column="in_fee" property="inFee" jdbcType="INTEGER" />
+    <result column="out_fee" property="outFee" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="merber_id" property="merberId" jdbcType="INTEGER" />
+    <result column="member_name" property="memberName" jdbcType="CHAR" />
+    <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.NpayCheckOrders" >
+    insert into npay_check_orders (order_id, order_dt, check_dt, 
+      channel_mer_id1, channel_mer_id2, order_amt, 
+      channelpay_amt, in_fee, out_fee, 
+      status, comment, merber_id, 
+      member_name, comment_time)
+    values (#{orderId,jdbcType=VARCHAR}, #{orderDt,jdbcType=DATE}, #{checkDt,jdbcType=DATE}, 
+      #{channelMerId1,jdbcType=BIGINT}, #{channelMerId2,jdbcType=BIGINT}, #{orderAmt,jdbcType=INTEGER}, 
+      #{channelpayAmt,jdbcType=INTEGER}, #{inFee,jdbcType=INTEGER}, #{outFee,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{merberId,jdbcType=INTEGER}, 
+      #{memberName,jdbcType=CHAR}, #{commentTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayCheckOrders" >
+    insert into npay_check_orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="orderDt != null" >
+        order_dt,
+      </if>
+      <if test="checkDt != null" >
+        check_dt,
+      </if>
+      <if test="channelMerId1 != null" >
+        channel_mer_id1,
+      </if>
+      <if test="channelMerId2 != null" >
+        channel_mer_id2,
+      </if>
+      <if test="orderAmt != null" >
+        order_amt,
+      </if>
+      <if test="channelpayAmt != null" >
+        channelpay_amt,
+      </if>
+      <if test="inFee != null" >
+        in_fee,
+      </if>
+      <if test="outFee != null" >
+        out_fee,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="merberId != null" >
+        merber_id,
+      </if>
+      <if test="memberName != null" >
+        member_name,
+      </if>
+      <if test="commentTime != null" >
+        comment_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderDt != null" >
+        #{orderDt,jdbcType=DATE},
+      </if>
+      <if test="checkDt != null" >
+        #{checkDt,jdbcType=DATE},
+      </if>
+      <if test="channelMerId1 != null" >
+        #{channelMerId1,jdbcType=BIGINT},
+      </if>
+      <if test="channelMerId2 != null" >
+        #{channelMerId2,jdbcType=BIGINT},
+      </if>
+      <if test="orderAmt != null" >
+        #{orderAmt,jdbcType=INTEGER},
+      </if>
+      <if test="channelpayAmt != null" >
+        #{channelpayAmt,jdbcType=INTEGER},
+      </if>
+      <if test="inFee != null" >
+        #{inFee,jdbcType=INTEGER},
+      </if>
+      <if test="outFee != null" >
+        #{outFee,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="merberId != null" >
+        #{merberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null" >
+        #{memberName,jdbcType=CHAR},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,136 @@
+.top-header {
+    width: 100%;
+    height: 50px;
+    background-color: #41bff1;
+}
+.header-container {
+    width: 1180px;
+    margin: 0 auto;
+}
+.header-left {
+    position: relative;
+    padding-top: 9px;
+    height: 41px;
+}
+.big-title {
+    color: #fff;
+    font-size: 22px;
+}
+.beta-label {
+    color: #dddddd;
+    font-size: 13px;
+    position: absolute;
+    top: 8px;
+    left: 104px;
+}
+.header-right {
+    color: #fff;
+    font-size: 14px;
+}
+
+.header-right-logout {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    height: 15px;
+    line-height: 15px;
+    padding-left: 8px;
+    margin-left: 8px;
+    text-decoration: none;
+    border-left: 2px solid #fff;
+}
+
+.main {
+    width: 1182px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0691c9;
+    display: block;
+    margin-left: 17px;
+}
+.header-english {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0691c9;
+    display: block;
+    margin-left: 17px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.separate-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #0691c9;
+}
+.main-content {
+    width: 1211px;
+    margin-top: 15px;
+}
+.main-left {
+    width: 228px;
+    border-radius: 8px;
+    background-color: #41bff1;
+    margin-left: 7px;
+}
+
+.first-header {
+    margin-top: 19px;
+    margin-bottom: 14px;
+}
+.second-header {
+    height: 28px;
+    width: 203px;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+.first-header-text,
+.second-header-text {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+}
+.first-header-dot {
+    margin-left: 29px;
+    margin-right: 15px;
+    width: 4px;
+    background-color: #fff;
+    height: 17px;
+}
+.first-header-text {
+    font-size: 18px;
+}
+.second-header-text {
+    font-size: 14px;
+    margin-left: 50px;
+}
+.second-header-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    margin-left: 18px;
+}
+.second-header-select {
+    background-color: #fff;
+}
+.second-header-select .second-header-dot {
+    border: 1px solid #41bff1;
+}
+.second-header-select .second-header-text {
+    color: #41bff1;
+}
+
+.main-logo {
+    width: 235px;
+}
+
+.main-quee {
+    width: 820px;
+    margin-left: 30px;
+}

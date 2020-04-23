@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayAdjustLogMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayAdjustLog" >
+    <result column="orderId" property="orderid" jdbcType="VARCHAR" />
+    <result column="origin_status" property="originStatus" jdbcType="INTEGER" />
+    <result column="updated_status" property="updatedStatus" jdbcType="INTEGER" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.myd.entity.NpayAdjustLog" >
+    insert into npay_adjust_log (orderId, origin_status, updated_status, 
+      update_at, create_at, comment
+      )
+    values (#{orderid,jdbcType=VARCHAR}, #{originStatus,jdbcType=INTEGER}, #{updatedStatus,jdbcType=INTEGER}, 
+      #{updateAt,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayAdjustLog" >
+    insert into npay_adjust_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        orderId,
+      </if>
+      <if test="originStatus != null" >
+        origin_status,
+      </if>
+      <if test="updatedStatus != null" >
+        updated_status,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="originStatus != null" >
+        #{originStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updatedStatus != null" >
+        #{updatedStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

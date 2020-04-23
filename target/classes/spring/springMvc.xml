@@ -1,0 +1,170 @@
+﻿<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	
+	<!--这里让扫描controller，指定controller的包-->
+<!--  	<context:component-scan base-package="com.myd.controller"/>-->
+	<!-- 注解驱动：配置处理器映射器和适配器 -->
+	<!--<mvc:annotation-driven/>-->
+	
+	
+ 	<!-- 自动扫描 -->
+    <context:component-scan base-package="com.myd" />
+
+		<mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+	<!-- 视图解析器
+    解析jsp解析，默认使用jstl标签，classpath下得有jstl的包
+    -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置jsp路径的前缀 -->
+		<property name="prefix" value="/WEB-INF/view/"/>
+		<!-- 配置jsp路径的后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	  
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/static/" mapping="/static/**"/> 
+	<mvc:resources location="/image/" mapping="/image/**"/> 
+	<mvc:resources location="/merchant/" mapping="/merchant/**"/> 
+	<mvc:annotation-driven/>
+
+
+
+  <!-- 进行拦截：/**表示拦截所有controller -->
+	<mvc:interceptors>  
+	    <mvc:interceptor>  
+<!-- 			<mvc:mapping path="/merchant**"/> -->
+			<mvc:mapping path="/merchant/**"/>
+			<mvc:mapping path="/balanceLogs**"/>
+<!-- 			<mvc:mapping path="/balanceLogs/**"/> -->
+			<mvc:mapping path="/daifu**"/>
+<!-- 			<mvc:mapping path="/daifu/**"/> -->
+			<mvc:mapping path="/moneyHistory**"/>
+<!-- 			<mvc:mapping path="/moneyHistory/**"/> -->
+			<mvc:mapping path="/orderHistory**"/>
+<!-- 			<mvc:mapping path="/orderHistory/**"/> -->
+			<mvc:mapping path="/withdrawHistory**"/>
+<!-- 			<mvc:mapping path="/withdrawHistory/**"/> -->
+			<mvc:mapping path="/user**"/>
+<!-- 			<mvc:mapping path="/user/**"/> -->
+	    	<mvc:exclude-mapping path="/merchant/login**"/>
+	        <bean class="com.myd.util.LoginHandlerInterceptor"/>  
+	    </mvc:interceptor>  
+	</mvc:interceptors> 
+
+
+
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/kltPayReturn"/>
+			<mvc:exclude-mapping path="/kltDaifuReturn"/>
+			<mvc:exclude-mapping path="/kjpayConfirm"/>
+			<mvc:exclude-mapping path="/mechrtklt/**"/>
+			<mvc:exclude-mapping path="/klt/**"/>
+			<mvc:exclude-mapping path="/test"/>
+			<mvc:exclude-mapping path="/testDaifu"/>
+			<mvc:exclude-mapping path="/testdaifu"/>
+			<mvc:exclude-mapping path="/testBank"/>
+			<mvc:exclude-mapping path="/batchDaifu"/>
+			
+			
+			<mvc:exclude-mapping path="/index/index.do"/>
+			<mvc:exclude-mapping path="/payReturn"/>
+			<mvc:exclude-mapping path="/daifuReturn"/>
+			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/manager/**"/>
+			<mvc:exclude-mapping path="/merchants/**"/>
+			<mvc:exclude-mapping path="/channel/**"/>
+			<mvc:exclude-mapping path="/notice/**"/>
+
+			<mvc:exclude-mapping path="/routes/**"/>
+			<mvc:exclude-mapping path="/temp/**"/>
+			<mvc:exclude-mapping path="/history/**"/>
+			<mvc:exclude-mapping path="/daifuhistory/**"/>
+			<mvc:exclude-mapping path="/daifutemp/**"/>
+			<mvc:exclude-mapping path="/daifuroutes/**"/>
+			<mvc:exclude-mapping path="/Oplogs/**"/>
+			<mvc:exclude-mapping path="/balance/**"/>
+			
+
+			<mvc:exclude-mapping path="/merchant*"/>
+			<mvc:exclude-mapping path="/merchant/**"/>
+			<mvc:exclude-mapping path="/balanceLogs*"/>
+			<mvc:exclude-mapping path="/balanceLogs/**"/>
+			<mvc:exclude-mapping path="/daifu*"/>
+			<mvc:exclude-mapping path="/daifu/**"/>
+			<mvc:exclude-mapping path="/moneyHistory*"/>
+			<mvc:exclude-mapping path="/moneyHistory/**"/>
+			<mvc:exclude-mapping path="/orderHistory*"/>
+			<mvc:exclude-mapping path="/orderHistory/**"/>
+			<mvc:exclude-mapping path="/withdrawHistory*"/>
+			<mvc:exclude-mapping path="/withdrawHistory/**"/>
+			<mvc:exclude-mapping path="/user*"/>
+			<mvc:exclude-mapping path="/user/**"/>
+			<mvc:exclude-mapping path="/login*"/>
+			
+			
+			<mvc:exclude-mapping path="/juhe/**"/>
+			
+			
+			<mvc:exclude-mapping path="/juhetest"/>
+			<mvc:exclude-mapping path="/juheBanks"/>
+			<mvc:exclude-mapping path="/pay10"/>
+			<mvc:exclude-mapping path="/juheBanks10"/>
+			<mvc:exclude-mapping path="/threeBankNotify"/>
+			<mvc:exclude-mapping path="/ZjxBankNotify"/>
+			<mvc:exclude-mapping path="/ZjxDaifuNotify"/>
+			<mvc:exclude-mapping path="/tokenBankNotify"/>
+			<mvc:exclude-mapping path="/UsdtPayBankNotify"/>
+			<mvc:exclude-mapping path="/JinYiPayBankNotify"/>
+			<mvc:exclude-mapping path="/ApiPayBankNotify"/>
+			<mvc:exclude-mapping path="/YMDNotify"/>
+			
+			
+			
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/image/**"/>
+			<mvc:exclude-mapping path="/merchant/**"/>
+		
+			
+			
+			
+			<bean class="com.myd.interceptor.ApiInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			 <mvc:mapping path="/manager/admin.do"/>
+			 <mvc:exclude-mapping path="/manager/login.htm"/> 
+			 <mvc:exclude-mapping path="/merchant/login**"/>
+			<bean class="com.myd.manager.controller.interceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+</beans>

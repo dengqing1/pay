@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.GatherMapper">
+
+<resultMap id="BaseResultMap" type="com.myd.entity.Gather" >
+    <id column="gather_id" property="gatherId" jdbcType="INTEGER" />
+    <result column="gather_merchantId" property="gatherMerchantId" jdbcType="VARCHAR" />
+    <result column="gather_merOrderId" property="gatherMerOrderId" jdbcType="VARCHAR" />
+    <result column="gather_txnAmt" property="gatherTxnAmt" jdbcType="VARCHAR" />
+    <result column="gather_accno" property="gatherAccno" jdbcType="VARCHAR" />
+    <result column="gather_ppflag" property="gatherPpflag" jdbcType="VARCHAR" />
+    <result column="gather_customerName" property="gatherCustomerName" jdbcType="VARCHAR" />
+    <result column="gather_bankId" property="gatherBankId" jdbcType="VARCHAR" />
+    <result column="gather_time" property="gatherTime" jdbcType="VARCHAR" />
+    <result column="gather_update_time" property="gatherUpdateTime" jdbcType="VARCHAR" />
+    <result column="gather_state" property="gatherState" jdbcType="VARCHAR" />
+    <result column="gather_key" property="gatherKey" jdbcType="VARCHAR" />
+    <result column="gather_phoneNo" property="gatherPhoneNo" jdbcType="VARCHAR" />
+    
+  </resultMap>
+ <select id="list" parameterType="map" resultType="com.myd.entity.Gather">
+  		  	SELECT n.gather_id gatherId,
+  			   n.gather_merchantId gatherMerchantId,
+  			   n.gather_merOrderId gatherMerOrderId,
+  			   n.gather_txnAmt gatherTxnAmt,
+  			   n.gather_accno gatherAccno,
+			   n.gather_ppflag gatherPpflag,
+			   n.gather_customerName gatherCustomerName,
+			   n.gather_bankId gatherBankId,
+			   CAST(CAST(n.gather_txnAmt AS DECIMAL(18,2))/100 AS DECIMAL(18,2)) txnAmts,
+			   n.gather_time gatherTime,
+			   n.gather_state gatherState,
+			   m.mer_short_name msName,
+			   t.bank_name bankName
+		FROM gather n 
+		LEFT JOIN npay_mer_info m  ON m.mer_id  = n.gather_merchantId
+		LEFT JOIN npay_tf56_bank t ON t.bank_id = n.gather_bankId  
+  		<where>
+  			<if test="createAtTimeBegin != null and createAtTimeBegin !=''">
+	  		    n.gather_time between "${createAtTimeBegin}" and "${createAtTimeEnd}"
+	  		</if>
+  			<if test="merchantId != null and merchantId !=''">
+	  			and n.gather_merchantId = '${merchantId}'
+	  		</if>
+	  		<if test="gatherMerOrderId != null and gatherMerOrderId !=''">
+	  			and n.gather_merOrderId = '${gatherMerOrderId}'
+	  		</if>
+	  		<if test="gatherTxnAmt != null and gatherTxnAmt !=''">
+	  			and n.gather_txnAmt = '${gatherTxnAmt}'
+	  		</if>
+	  		<if test="gatherBankId != null and gatherBankId !=''">
+	  			and n.gather_bankId = '${gatherBankId}'
+	  		</if>
+	  		<if test="gatherState != null and gatherState !=''">
+	  			and n.gather_state = '${gatherState}'
+	  		</if>
+  		</where>
+  		ORDER BY gather_time DESC
+  		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+  </select>
+  
+  
+  
+  <select id="count" parameterType="map" resultType="int">
+  		SELECT count(1) FROM gather n 
+  		<where>
+  			<if test="createAtTimeBegin != null and createAtTimeBegin !=''">
+	  		    n.gather_time between "${createAtTimeBegin}" and "${createAtTimeEnd}"
+	  		</if>
+  			<if test="merchantId != null and merchantId !=''">
+	  			and n.gather_merchantId = '${merchantId}'
+	  		</if>
+	  		<if test="gatherMerOrderId != null and gatherMerOrderId !=''">
+	  			and n.gather_merOrderId = '${gatherMerOrderId}'
+	  		</if>
+	  		<if test="gatherTxnAmt != null and gatherTxnAmt !=''">
+	  			and n.gather_txnAmt = '${gatherTxnAmt}'
+	  		</if>
+	  		<if test="gatherBankId != null and gatherBankId !=''">
+	  			and n.gather_bankId = '${gatherBankId}'
+	  		</if>
+	  		<if test="gatherState != null and gatherState !=''">
+	  			and n.gather_state = '${gatherState}'
+	  		</if>
+	  		
+  		</where>
+  </select>
+
+
+
+
+
+
+	<update id="updateByExampleSelective" parameterType="com.myd.entity.Gather">
+			UPDATE gather SET gather_state = #{gatherState},gather_update_time = #{gatherUpdateTime} WHERE gather_id = #{gatherId}
+	</update>
+
+	<insert id="insert" parameterType="com.myd.entity.Gather">
+			insert into gather (gather_merchantId, gather_merOrderId, gather_txnAmt, 
+		      gather_accno, gather_ppflag, gather_customerName, 
+		      gather_bankId, gather_time,gather_update_time, gather_state,gather_key,gather_phoneNo)
+		    values (
+		       #{gatherMerchantId,jdbcType=INTEGER}, 
+		       #{gatherMerOrderId,jdbcType=VARCHAR}, 
+		       #{gatherTxnAmt,jdbcType=VARCHAR}, 
+		       #{gatherAccno,jdbcType=VARCHAR}, 
+		       #{gatherPpflag,jdbcType=VARCHAR}, 
+		       #{gatherCustomerName,jdbcType=VARCHAR}, 
+		       #{gatherBankId,jdbcType=VARCHAR},
+		       #{gatherTime,jdbcType=VARCHAR}, 
+		       #{gatherUpdateTime,jdbcType=VARCHAR}, 
+		       #{gatherState,jdbcType=VARCHAR},
+		       #{gatherKey,jdbcType=VARCHAR},
+		       #{gatherPhoneNo,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
+			select * from gather g where g.gather_id = #{id}
+	</select>
+</mapper>

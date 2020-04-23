@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayInRoutesMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayInRoutes" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="merchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="bankId" property="bankid" jdbcType="VARCHAR" />
+    <result column="gt" property="gt" jdbcType="INTEGER" />
+    <result column="lt" property="lt" jdbcType="INTEGER" />
+    <result column="channelAbbr" property="channelabbr" jdbcType="VARCHAR" />
+    <result column="accumulative" property="accumulative" jdbcType="INTEGER" />
+    <result column="routes_gateway" property="routesGateway" jdbcType="VARCHAR" />
+    <result column="routes_card_type" property="routesCardType" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.myd.entity.NpayInRoutes" extends="BaseResultMap" >
+    <result column="channelMerId" property="channelmerid" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchantId, bankId, gt, lt, channelAbbr,accumulative
+  </sql>
+  <sql id="Blob_Column_List" >
+    channelMerId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from npay_in_routes
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from npay_in_routes
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayInRoutes" >
+    insert into npay_in_routes 
+      (id, 
+       merchantId, 
+       bankId, 
+       gt, 
+       lt, 
+       channelAbbr, 
+       channelMerId,
+       accumulative,
+       routes_gateway,
+       routes_card_type
+      )
+    values 
+       (#{id,jdbcType=INTEGER},
+        #{merchantid,jdbcType=VARCHAR}, 
+        #{bankid,jdbcType=VARCHAR}, 
+        #{gt,jdbcType=INTEGER}, 
+        #{lt,jdbcType=INTEGER}, 
+        #{channelabbr,jdbcType=VARCHAR}, 
+        #{channelmerid,jdbcType=LONGVARCHAR},
+        #{accumulative,jdbcType=INTEGER},
+        #{routesGateway,jdbcType=VARCHAR},
+        #{routesCardType,jdbcType=VARCHAR}
+        )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayInRoutes" >
+    insert into npay_in_routes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="merchantid != null" >
+        merchantId,
+      </if>
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="gt != null" >
+        gt,
+      </if>
+      <if test="lt != null" >
+        lt,
+      </if>
+      <if test="channelabbr != null" >
+        channelAbbr,
+      </if>
+      <if test="channelmerid != null" >
+        channelMerId,
+      </if>
+      <if test="accumulative != null" >
+        accumulative,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="gt != null" >
+        #{gt,jdbcType=INTEGER},
+      </if>
+      <if test="lt != null" >
+        #{lt,jdbcType=INTEGER},
+      </if>
+      <if test="channelabbr != null" >
+        #{channelabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelmerid != null" >
+        #{channelmerid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="accumulative != null" >
+        #{accumulative,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayInRoutes" >
+    update npay_in_routes
+    <set >
+      <if test="merchantid != null" >
+        merchantId = #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankid != null" >
+        bankId = #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="gt != null" >
+        gt = #{gt,jdbcType=INTEGER},
+      </if>
+      <if test="lt != null" >
+        lt = #{lt,jdbcType=INTEGER},
+      </if>
+      <if test="channelabbr != null" >
+        channelAbbr = #{channelabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="channelmerid != null" >
+        channelMerId = #{channelmerid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="accumulative != null" >
+        accumulative = #{accumulative,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.myd.entity.NpayInRoutes" >
+    update npay_in_routes
+    set merchantId = #{merchantid,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=VARCHAR},
+      gt = #{gt,jdbcType=INTEGER},
+      lt = #{lt,jdbcType=INTEGER},
+      channelAbbr = #{channelabbr,jdbcType=VARCHAR},
+      channelMerId = #{channelmerid,jdbcType=LONGVARCHAR},
+      routes_gateway= #{routesGateway,jdbcType=VARCHAR},
+      routes_card_type = #{routesCardType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayInRoutes" >
+    update npay_in_routes
+    set merchantId = #{merchantid,jdbcType=VARCHAR},
+      bankId = #{bankid,jdbcType=VARCHAR},
+      gt = #{gt,jdbcType=INTEGER},
+      lt = #{lt,jdbcType=INTEGER},
+      channelAbbr = #{channelabbr,jdbcType=VARCHAR},
+      channelMerId = #{channelmerid,jdbcType=LONGVARCHAR},
+      accumulative = #{accumulative,jdbcType=INTEGER},
+      routes_gateway= #{routesGateway,jdbcType=VARCHAR},
+      routes_card_type = #{routesCardType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByChartId" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from npay_in_routes
+    where merchantId = #{chartId} and (lt <![CDATA[>= ]]> #{money} and gt <![CDATA[<= ]]> #{money})
+  </select>
+  
+  
+  <select id="selectByRoutes" parameterType="map" resultType="map">
+  	<!-- 	SELECT
+			*, 
+		  cast(r.gt/100 as decimal(18,2)) min,
+		  cast(r.lt/100 as decimal(18,2)) max
+		FROM
+	npay_in_routes r -->
+	
+	SELECT
+			*, f.`id` fid,
+		  CAST(r.gt/100 AS DECIMAL(18,2)) min,
+		  CAST(r.lt/100 AS DECIMAL(18,2)) max
+		  
+		FROM
+	npay_in_routes r	
+	INNER JOIN npay_mer_fee_rates f
+	ON r.`merchantId` = f.`mer_id` 
+	AND r.`channelMerId` = f.`channelMerId`
+	AND r.`routes_gateway` = f.`gateway` 
+	AND f.`gateway` NOT IN ('daifu')
+	AND r.`routes_card_type` = f.`card_type`
+	
+	
+	
+  </select>
+  
+  <select id="selectByPrimary" parameterType="com.myd.entity.NpayInRoutes" resultMap="BaseResultMap">
+  		SELECT * FROM npay_in_routes
+  		where 1=1
+  		<if test="id">
+	   		and id = #{id,jdbcType=INTEGER}
+	   	</if>
+  		<if test="merchantid!=null">
+  			and merchantId = #{merchantid}
+  		</if>
+  		<if test="channelabbr!=null">
+	   		and channelAbbr = #{channelabbr}
+	   	</if>
+	   	<if test="channelmerid!=null">
+	   		and channelMerId = #{channelmerid}
+	   	</if>
+	   	<if test="routesGateway != null" >
+        	and routes_gateway = #{routesGateway}
+      	</if>
+      
+       <if test="routesCardType != null" >
+       		and  routes_card_type =  #{routesCardType}
+       </if>
+  </select>
+  
+  <select id="selectNpayInRoutesById" resultType="map" parameterType="map">
+  		SELECT c.channel_mer_id as channelMerId FROM npay_channels c
+			WHERE c.gateway not in ('daifu')
+			AND c.channel_mer_abbr = #{channelAbbr}
+  </select>
+  
+  <select id="selectRoutesByRates" parameterType="map" resultType="map">
+  		SELECT
+  			r.id,
+			r.merchantId,
+			r.gt min,
+			r.lt max,
+			r.accumulative,
+			r.bankId,
+			r.channelAbbr,
+			r.channelMerId,
+			r.routes_gateway,
+			r.routes_card_type,
+			f.id fid,
+			f.gateway,
+			f.card_type,
+			f.channelAbbr,
+			f.channelMerId,
+			f.fee_type,
+  			f.fee_amount
+		FROM
+			npay_mer_fee_rates f
+		INNER JOIN npay_in_routes r 
+		ON r.`merchantId` = f.`mer_id` 
+	AND r.`channelMerId` = f.`channelMerId`
+	AND r.`routes_gateway` = f.`gateway` 
+	AND r.`routes_card_type` = f.`card_type`
+	AND f.`gateway` NOT IN ('daifu') 
+		WHERE
+			r.merchantId = #{merchantId}
+		AND f.channelAbbr = #{channelAbbr}
+		AND r.channelMerId = #{channelMerId}
+		AND r.routes_gateway = #{routesGateway}
+		AND r.routes_card_type = #{routesCardType}
+  </select>
+  
+  
+  
+</mapper>

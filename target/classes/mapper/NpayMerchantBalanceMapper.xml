@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayMerchantBalanceMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayMerchantBalance" >
+    <id column="merchantId" property="merchantid" jdbcType="VARCHAR" />
+    <result column="merchantName" property="merchantname" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="balance" property="balance" jdbcType="BIGINT" />
+    <result column="balance_available" property="balanceAvailable" jdbcType="BIGINT" />
+    <result column="freeze_balance" property="freezeBalance" jdbcType="BIGINT" />
+    <result column="block_balance" property="blockBalance" jdbcType="BIGINT" />
+    <result column="last_oid" property="lastOid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    merchantId, merchantName, status, balance, balance_available, freeze_balance, block_balance, 
+    last_oid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_merchant_balance
+    where merchantId = #{merchantid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from npay_merchant_balance
+    where merchantId = #{merchantid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayMerchantBalance" >
+    insert into npay_merchant_balance (merchantId, merchantName, status, 
+      balance, balance_available, freeze_balance, 
+      block_balance, last_oid)
+    values (#{merchantid,jdbcType=VARCHAR}, #{merchantname,jdbcType=CHAR}, #{status,jdbcType=INTEGER}, 
+      #{balance,jdbcType=BIGINT}, #{balanceAvailable,jdbcType=BIGINT}, #{freezeBalance,jdbcType=BIGINT}, 
+      #{blockBalance,jdbcType=BIGINT}, #{lastOid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayMerchantBalance" >
+    insert into npay_merchant_balance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        merchantId,
+      </if>
+      <if test="merchantname != null" >
+        merchantName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="balance != null" >
+        balance,
+      </if>
+      <if test="balanceAvailable != null" >
+        balance_available,
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance,
+      </if>
+      <if test="blockBalance != null" >
+        block_balance,
+      </if>
+      <if test="lastOid != null" >
+        last_oid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantname != null" >
+        #{merchantname,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="balanceAvailable != null" >
+        #{balanceAvailable,jdbcType=BIGINT},
+      </if>
+      <if test="freezeBalance != null" >
+        #{freezeBalance,jdbcType=BIGINT},
+      </if>
+      <if test="blockBalance != null" >
+        #{blockBalance,jdbcType=BIGINT},
+      </if>
+      <if test="lastOid != null" >
+        #{lastOid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayMerchantBalance" >
+    update npay_merchant_balance
+    <set >
+      <if test="merchantname != null" >
+        merchantName = #{merchantname,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="balance != null" >
+        balance = #{balance,jdbcType=BIGINT},
+      </if>
+      <if test="balanceAvailable != null" >
+        balance_available = #{balanceAvailable,jdbcType=BIGINT},
+      </if>
+      <if test="freezeBalance != null" >
+        freeze_balance = #{freezeBalance,jdbcType=BIGINT},
+      </if>
+      <if test="blockBalance != null" >
+        block_balance = #{blockBalance,jdbcType=BIGINT},
+      </if>
+      <if test="lastOid != null" >
+        last_oid = #{lastOid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where merchantId = #{merchantid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayMerchantBalance" >
+    update npay_merchant_balance
+    set merchantName = #{merchantname,jdbcType=CHAR},
+      status = #{status,jdbcType=INTEGER},
+      balance = #{balance,jdbcType=BIGINT},
+      balance_available = #{balanceAvailable,jdbcType=BIGINT},
+      freeze_balance = #{freezeBalance,jdbcType=BIGINT},
+      block_balance = #{blockBalance,jdbcType=BIGINT},
+      last_oid = #{lastOid,jdbcType=VARCHAR}
+    where merchantId = #{merchantid,jdbcType=VARCHAR}
+  </update>
+</mapper>

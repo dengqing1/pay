@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayPreblockBalanceMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayPreblockBalance" >
+    <id column="merchantid" property="merchantid" jdbcType="VARCHAR" />
+    <result column="pre_block_balance" property="preBlockBalance" jdbcType="BIGINT" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    merchantid, pre_block_balance, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_preblock_balance
+    where merchantid = #{merchantid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from npay_preblock_balance
+    where merchantid = #{merchantid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayPreblockBalance" >
+    insert into npay_preblock_balance (merchantid, pre_block_balance, update_at
+      )
+    values (#{merchantid,jdbcType=VARCHAR}, #{preBlockBalance,jdbcType=BIGINT}, #{updateAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayPreblockBalance" >
+    insert into npay_preblock_balance
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        merchantid,
+      </if>
+      <if test="preBlockBalance != null" >
+        pre_block_balance,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchantid != null" >
+        #{merchantid,jdbcType=VARCHAR},
+      </if>
+      <if test="preBlockBalance != null" >
+        #{preBlockBalance,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayPreblockBalance" >
+    update npay_preblock_balance
+    <set >
+      <if test="preBlockBalance != null" >
+        pre_block_balance = #{preBlockBalance,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where merchantid = #{merchantid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayPreblockBalance" >
+    update npay_preblock_balance
+    set pre_block_balance = #{preBlockBalance,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where merchantid = #{merchantid,jdbcType=VARCHAR}
+  </update>
+</mapper>

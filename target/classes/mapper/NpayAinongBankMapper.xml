@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.dao.NpayAinongBankMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.entity.NpayAinongBank" >
+    <id column="bankId" property="bankid" jdbcType="VARCHAR" />
+    <result column="bankName" property="bankname" jdbcType="VARCHAR" />
+    <result column="bankLogo" property="banklogo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creditSupport" property="creditsupport" jdbcType="BIT" />
+    <result column="creditStatus" property="creditstatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bankId, bankName, bankLogo, status, creditSupport, creditStatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from npay_ainong_bank
+    where bankId = #{bankid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from npay_ainong_bank
+    where bankId = #{bankid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.myd.entity.NpayAinongBank" >
+    insert into npay_ainong_bank (bankId, bankName, bankLogo, 
+      status, creditSupport, creditStatus
+      )
+    values (#{bankid,jdbcType=VARCHAR}, #{bankname,jdbcType=VARCHAR}, #{banklogo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{creditsupport,jdbcType=BIT}, #{creditstatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.entity.NpayAinongBank" >
+    insert into npay_ainong_bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bankid != null" >
+        bankId,
+      </if>
+      <if test="bankname != null" >
+        bankName,
+      </if>
+      <if test="banklogo != null" >
+        bankLogo,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creditsupport != null" >
+        creditSupport,
+      </if>
+      <if test="creditstatus != null" >
+        creditStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bankid != null" >
+        #{bankid,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="banklogo != null" >
+        #{banklogo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creditsupport != null" >
+        #{creditsupport,jdbcType=BIT},
+      </if>
+      <if test="creditstatus != null" >
+        #{creditstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.entity.NpayAinongBank" >
+    update npay_ainong_bank
+    <set >
+      <if test="bankname != null" >
+        bankName = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="banklogo != null" >
+        bankLogo = #{banklogo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creditsupport != null" >
+        creditSupport = #{creditsupport,jdbcType=BIT},
+      </if>
+      <if test="creditstatus != null" >
+        creditStatus = #{creditstatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bankId = #{bankid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.entity.NpayAinongBank" >
+    update npay_ainong_bank
+    set bankName = #{bankname,jdbcType=VARCHAR},
+      bankLogo = #{banklogo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      creditSupport = #{creditsupport,jdbcType=BIT},
+      creditStatus = #{creditstatus,jdbcType=INTEGER}
+    where bankId = #{bankid,jdbcType=VARCHAR}
+  </update>
+</mapper>

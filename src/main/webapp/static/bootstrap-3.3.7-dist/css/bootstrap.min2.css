@@ -1,0 +1,101 @@
+/*!
+ * Bootstrap v3.3.7 (http://getbootstrap.com)
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+ 
+ .th001{
+		font-size: 30px;
+		height:80px;
+		border-bottom: 1px solid black;
+		border-right: 1px solid black;
+		text-align: center;
+		letter-spacing: 15px;
+	}
+	table{
+		border-collapse: 0px;
+		border-spacing: 0px;
+		border-top: 1px solid black;
+		border-left: 1px solid black;
+		margin: 0 auto;
+		margin-top: 50px;
+		text-align: center;
+		line-height: 50px;
+	}
+	td{
+		font-size:16px;
+		width:200px;
+		height:50px;
+		border-bottom: 1px solid black;
+		border-right: 1px solid black;
+		
+	}
+.td001{
+		font-size:20px;
+		letter-spacing: 15px;
+}
+
+
+.IncomeTop{
+	width:100%;
+	height:50px;
+	margin-top: 50px;
+	padding-right:150px;
+	
+}
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+.video{width: 1200px;margin: 0 auto;margin-top:100px; hidden;zoom:1;background: #eee;}
+.video>div{float: left;height: 400px;}
+/* 
+.video>div:first-child {width: 5%;position:absolute;left:235px;background: url(http://www.bdqnsz.com/skin/images/video-btn-l.png) center center no-repeat;}
+.video>div:last-child {width: 5%;position:absolute;left:915px;background: url(http://www.bdqnsz.com/skin/images/video-btn-r.png) center center no-repeat;}
+ */
+.video>div:nth-of-type(2){width: 90%;}
+.video ul{position: relative;width:600px;height: 400px;}
+.video li{transition: all .6s; position: absolute;background: url(http://www.bdqnsz.com/skin/images/video-bg.png) center center no-repeat;background-size: 100% 100%;}
+.video li>div{padding: 1% 1% 4%;}
+.video li video{width: 100%;}
+.video li h3{text-align: center;margin-top: 2px;color: #1766d7;}
+
+
+.video1{width: 520px;height: 300px; top: 0px;left: 285px; z-index: 3;}   /*锟斤拷锟斤拷5锟斤拷锟斤拷锟脚匡拷锟绞嘉伙拷锟斤拷啵拷锟斤拷锟斤拷懈锟斤拷锟�*/
+.video2{width: 520px;height: 300px; top: 0px;left: 285px; z-index: 2;}
+.video3{width: 520px;height: 300px; top: 0px;left: 285px; z-index: 2;}
+.video4{width: 520px;height: 300px; top: 0px;left: 285px; z-index: 2;}
+.video5{width: 520px;height: 300px; top: 0px;left: 285px; z-index: 1;}
+
+
+#picture{
+	width:87%;
+	height:500px;
+	margin:auto;
+	margin-top: 5%;
+}
+.picture_left{
+	width:80%;
+	height:500px;
+	float:left;
+}
+.picture_right{
+	width:19.9999%;
+	height:400px;
+	float:left;
+}
+.picture_right_smallpicture{
+	width:19.9999%;
+	height:58.222px;
+}
+.col-md-12{
+	margin-top: 0px;
+	padding-top: 0px;
+}
+.table_pict{
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+
+
+
